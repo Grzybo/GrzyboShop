@@ -93,6 +93,12 @@
     <Compile Include="MasksForm.Designer.cs">
       <DependentUpon>MasksForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MorphologicalOperationsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MorphologicalOperationsForm.Designer.cs">
+      <DependentUpon>MorphologicalOperationsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="NeighborhoodOperationsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,12 +122,6 @@
       <DependentUpon>StretchWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Tools.cs" />
-    <Compile Include="Window.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Window.Designer.cs">
-      <DependentUpon>Window.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="BinaryOperationsForm.resx">
       <DependentUpon>BinaryOperationsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -130,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MasksForm.resx">
       <DependentUpon>MasksForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MorphologicalOperationsForm.resx">
+      <DependentUpon>MorphologicalOperationsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NeighborhoodOperationsForm.resx">
       <DependentUpon>NeighborhoodOperationsForm.cs</DependentUpon>
@@ -148,9 +151,6 @@
     </Compile>
     <EmbeddedResource Include="StretchWindow.resx">
       <DependentUpon>StretchWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Window.resx">
-      <DependentUpon>Window.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Emgu.CV.Runtime.Windows.shproj" />
     <None Include="packages.config" />

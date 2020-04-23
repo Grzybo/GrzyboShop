@@ -72,8 +72,8 @@ namespace APO
             if (NotRadioButton.Checked)
             {
                 Image<Bgra, byte> resultImage = new Image<Bgra, byte>(imageA.Size.Width, imageA.Size.Height);
-                resultImage = imageA.Not();
-                //CvInvoke.BitwiseNot(imageA, resultImage);
+                //resultImage = imageA.Not();
+                CvInvoke.BitwiseNot(imageA, resultImage);
                 ResultImagePictureBox.Image = resultImage.ToBitmap();
                 Histogram_ResultImage();
                 return;

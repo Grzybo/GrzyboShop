@@ -21,7 +21,6 @@ namespace APO
         {
             InitializeComponent();
             MainMenuStrip.BackColor = Color.LightGray;
-            player.Ctlcontrols.stop();
 
         }
         
@@ -42,15 +41,6 @@ namespace APO
             }  
         }
 
-        private void playToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            player.Ctlcontrols.play();
-        }
-
-        private void stopToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            player.Ctlcontrols.stop();
-        }
 
         private void ąsiedztwaToolStripMenuItem_Click(object sender, EventArgs e)
         { 
@@ -62,6 +52,12 @@ namespace APO
         {
             BinaryOperationsForm binaryOperationsForm = new BinaryOperationsForm();
             binaryOperationsForm.Show();
+        }
+
+        private void morfologicalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MorphologicalOperationsForm morphologicalOperationsForm = new MorphologicalOperationsForm();
+            morphologicalOperationsForm.Show();
         }
     }
 
