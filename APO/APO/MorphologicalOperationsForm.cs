@@ -193,7 +193,7 @@ namespace APO
         {
             Image<Bgra, byte> skeleton = new Image<Bgra, byte>(image.Size.Width, image.Size.Height);
             int i = 0;
-            while (i < 12) //CvInvoke.CountNonZero(image) >= 0)
+            while (i < 15)
             {
             
                 Image<Bgra, byte> img_open = new Image<Bgra, byte>(image.Size.Width, image.Size.Height);
@@ -211,7 +211,7 @@ namespace APO
                 CvInvoke.BitwiseOr(skeleton, img_eroded, skeleton);
                 image = img_eroded.Copy();
                 ++i;
-                MorfologicalPictureBox.Image = skeleton.ToBitmap();
+                MorfologicalPictureBox.Image = image.ToBitmap();
             }
             //MorfologicalPictureBox.Image = image.ToBitmap();
         }
