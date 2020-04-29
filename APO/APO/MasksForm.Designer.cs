@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.RadioButton3X3 = new System.Windows.Forms.RadioButton();
             this.RadioButton5X5 = new System.Windows.Forms.RadioButton();
             this.RadioButton7X7 = new System.Windows.Forms.RadioButton();
@@ -85,8 +85,8 @@
             this.Laplasian_1_RadioButton = new System.Windows.Forms.RadioButton();
             this.NxMGroupBox = new System.Windows.Forms.GroupBox();
             this.SharpeningGroupBox = new System.Windows.Forms.GroupBox();
-            this.Laplasian_2_RadioButton = new System.Windows.Forms.RadioButton();
             this.Laplasian_3_RadioButton = new System.Windows.Forms.RadioButton();
+            this.Laplasian_2_RadioButton = new System.Windows.Forms.RadioButton();
             this.MasksPictureBox = new System.Windows.Forms.PictureBox();
             this.Execute = new System.Windows.Forms.Button();
             this.PrewittUp = new System.Windows.Forms.Button();
@@ -99,15 +99,17 @@
             this.PrewittDown = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.IsolatedRadioButton = new System.Windows.Forms.RadioButton();
-            this.ReflectRadioButton = new System.Windows.Forms.RadioButton();
             this.ReplicateRadioButton = new System.Windows.Forms.RadioButton();
+            this.ReflectRadioButton = new System.Windows.Forms.RadioButton();
+            this.IsolatedRadioButton = new System.Windows.Forms.RadioButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MasksChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NxMGroupBox.SuspendLayout();
             this.SharpeningGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MasksPictureBox)).BeginInit();
@@ -628,18 +630,6 @@
             this.SharpeningGroupBox.TabStop = false;
             this.SharpeningGroupBox.Text = "Sharpening";
             // 
-            // Laplasian_2_RadioButton
-            // 
-            this.Laplasian_2_RadioButton.AutoSize = true;
-            this.Laplasian_2_RadioButton.Location = new System.Drawing.Point(6, 47);
-            this.Laplasian_2_RadioButton.Name = "Laplasian_2_RadioButton";
-            this.Laplasian_2_RadioButton.Size = new System.Drawing.Size(79, 17);
-            this.Laplasian_2_RadioButton.TabIndex = 54;
-            this.Laplasian_2_RadioButton.TabStop = true;
-            this.Laplasian_2_RadioButton.Text = "Laplasian 2";
-            this.Laplasian_2_RadioButton.UseVisualStyleBackColor = true;
-            this.Laplasian_2_RadioButton.CheckedChanged += new System.EventHandler(this.Laplasian_2_RadioButton_CheckedChanged);
-            // 
             // Laplasian_3_RadioButton
             // 
             this.Laplasian_3_RadioButton.AutoSize = true;
@@ -651,6 +641,18 @@
             this.Laplasian_3_RadioButton.Text = "Laplasian 3";
             this.Laplasian_3_RadioButton.UseVisualStyleBackColor = true;
             this.Laplasian_3_RadioButton.CheckedChanged += new System.EventHandler(this.Laplasian_3_RadioButton_CheckedChanged);
+            // 
+            // Laplasian_2_RadioButton
+            // 
+            this.Laplasian_2_RadioButton.AutoSize = true;
+            this.Laplasian_2_RadioButton.Location = new System.Drawing.Point(6, 47);
+            this.Laplasian_2_RadioButton.Name = "Laplasian_2_RadioButton";
+            this.Laplasian_2_RadioButton.Size = new System.Drawing.Size(79, 17);
+            this.Laplasian_2_RadioButton.TabIndex = 54;
+            this.Laplasian_2_RadioButton.TabStop = true;
+            this.Laplasian_2_RadioButton.Text = "Laplasian 2";
+            this.Laplasian_2_RadioButton.UseVisualStyleBackColor = true;
+            this.Laplasian_2_RadioButton.CheckedChanged += new System.EventHandler(this.Laplasian_2_RadioButton_CheckedChanged);
             // 
             // MasksPictureBox
             // 
@@ -783,17 +785,17 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Edge Pixel Values";
             // 
-            // IsolatedRadioButton
+            // ReplicateRadioButton
             // 
-            this.IsolatedRadioButton.AutoSize = true;
-            this.IsolatedRadioButton.Location = new System.Drawing.Point(10, 20);
-            this.IsolatedRadioButton.Name = "IsolatedRadioButton";
-            this.IsolatedRadioButton.Size = new System.Drawing.Size(62, 17);
-            this.IsolatedRadioButton.TabIndex = 0;
-            this.IsolatedRadioButton.TabStop = true;
-            this.IsolatedRadioButton.Text = "Isolated";
-            this.IsolatedRadioButton.UseVisualStyleBackColor = true;
-            this.IsolatedRadioButton.CheckedChanged += new System.EventHandler(this.IsolatedRadioButton_CheckedChanged);
+            this.ReplicateRadioButton.AutoSize = true;
+            this.ReplicateRadioButton.Location = new System.Drawing.Point(10, 59);
+            this.ReplicateRadioButton.Name = "ReplicateRadioButton";
+            this.ReplicateRadioButton.Size = new System.Drawing.Size(70, 17);
+            this.ReplicateRadioButton.TabIndex = 2;
+            this.ReplicateRadioButton.TabStop = true;
+            this.ReplicateRadioButton.Text = "Replicate";
+            this.ReplicateRadioButton.UseVisualStyleBackColor = true;
+            this.ReplicateRadioButton.CheckedChanged += new System.EventHandler(this.ReplicateRadioButton_CheckedChanged);
             // 
             // ReflectRadioButton
             // 
@@ -807,21 +809,22 @@
             this.ReflectRadioButton.UseVisualStyleBackColor = true;
             this.ReflectRadioButton.CheckedChanged += new System.EventHandler(this.ReflectRadioButton_CheckedChanged);
             // 
-            // ReplicateRadioButton
+            // IsolatedRadioButton
             // 
-            this.ReplicateRadioButton.AutoSize = true;
-            this.ReplicateRadioButton.Location = new System.Drawing.Point(10, 59);
-            this.ReplicateRadioButton.Name = "ReplicateRadioButton";
-            this.ReplicateRadioButton.Size = new System.Drawing.Size(70, 17);
-            this.ReplicateRadioButton.TabIndex = 2;
-            this.ReplicateRadioButton.TabStop = true;
-            this.ReplicateRadioButton.Text = "Replicate";
-            this.ReplicateRadioButton.UseVisualStyleBackColor = true;
-            this.ReplicateRadioButton.CheckedChanged += new System.EventHandler(this.ReplicateRadioButton_CheckedChanged);
+            this.IsolatedRadioButton.AutoSize = true;
+            this.IsolatedRadioButton.Location = new System.Drawing.Point(10, 20);
+            this.IsolatedRadioButton.Name = "IsolatedRadioButton";
+            this.IsolatedRadioButton.Size = new System.Drawing.Size(62, 17);
+            this.IsolatedRadioButton.TabIndex = 0;
+            this.IsolatedRadioButton.TabStop = true;
+            this.IsolatedRadioButton.Text = "Isolated";
+            this.IsolatedRadioButton.UseVisualStyleBackColor = true;
+            this.IsolatedRadioButton.CheckedChanged += new System.EventHandler(this.IsolatedRadioButton_CheckedChanged);
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.doneToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -842,9 +845,16 @@
             // imageToolStripMenuItem
             // 
             this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
-            this.imageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.imageToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.imageToolStripMenuItem.Text = "Image";
             this.imageToolStripMenuItem.Click += new System.EventHandler(this.imageToolStripMenuItem_Click);
+            // 
+            // histogramToolStripMenuItem
+            // 
+            this.histogramToolStripMenuItem.Name = "histogramToolStripMenuItem";
+            this.histogramToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.histogramToolStripMenuItem.Text = "Histogram";
+            this.histogramToolStripMenuItem.Click += new System.EventHandler(this.histogramToolStripMenuItem_Click);
             // 
             // doneToolStripMenuItem
             // 
@@ -858,22 +868,30 @@
             this.MasksChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea3.Name = "ChartArea1";
-            this.MasksChart.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.MasksChart.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.MasksChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.MasksChart.Legends.Add(legend1);
             this.MasksChart.Location = new System.Drawing.Point(990, 38);
             this.MasksChart.Name = "MasksChart";
             this.MasksChart.Size = new System.Drawing.Size(376, 462);
             this.MasksChart.TabIndex = 69;
             this.MasksChart.Text = "chart1";
             // 
-            // histogramToolStripMenuItem
+            // fileToolStripMenuItem
             // 
-            this.histogramToolStripMenuItem.Name = "histogramToolStripMenuItem";
-            this.histogramToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.histogramToolStripMenuItem.Text = "Histogram";
-            this.histogramToolStripMenuItem.Click += new System.EventHandler(this.histogramToolStripMenuItem_Click);
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Text = "Open ";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // MasksForm
             // 
@@ -1035,5 +1053,7 @@
         private System.Windows.Forms.ToolStripMenuItem doneToolStripMenuItem;
         private System.Windows.Forms.DataVisualization.Charting.Chart MasksChart;
         private System.Windows.Forms.ToolStripMenuItem histogramToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
     }
 }

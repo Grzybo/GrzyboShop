@@ -27,7 +27,7 @@ namespace APO
             RadioButtonChange();
             MasksPictureBox.Image = image.ToBitmap();
             this.image = image;
-            Histogram();
+            Tools.Histogram(MasksChart, (Bitmap)MasksPictureBox.Image);
 
             /*
             TextBox[,] grid = new TextBox[,]
@@ -43,29 +43,9 @@ namespace APO
             */
 
         }
-
-        private void Histogram()
+        public MasksForm()
         {
-            Dictionary<Color, int> map = Tools.HistogramMap((Bitmap)MasksPictureBox.Image);
-            int[] RedLut = Tools.HistogramLUT(map, "red");
-            int[] GreenLut = Tools.HistogramLUT(map, "green");
-            int[] BlueLut = Tools.HistogramLUT(map, "blue");
-
-            MasksChart.Series.Clear();
-            MasksChart.Series.Add("Red");
-            MasksChart.Series.Add("Blue");
-            MasksChart.Series.Add("Green");
-            MasksChart.Series["Red"].Color = Color.Red;
-            MasksChart.Series["Blue"].Color = Color.Blue;
-            MasksChart.Series["Green"].Color = Color.Green;
-
-            for (int i = 0; i < RedLut.Length; i++)
-            {
-                this.MasksChart.Series["Red"].Points.AddXY(i, RedLut[i]);
-                this.MasksChart.Series["Green"].Points.AddXY(i, GreenLut[i]);
-                this.MasksChart.Series["Blue"].Points.AddXY(i, BlueLut[i]);
-                
-            }
+            InitializeComponent();
         }
 
         private void Execute_Click(object sender, EventArgs e)
@@ -88,7 +68,7 @@ namespace APO
             //Image<Gray, float> imageFiltered = imageGray * kernel;
             MasksPictureBox.Image = imageFiltered.ToBitmap();
 
-            Histogram();
+            Tools.Histogram(MasksChart, (Bitmap)MasksPictureBox.Image);
         }
         private float[,] Filter3x3()
         {
@@ -357,6 +337,18 @@ namespace APO
 
             try { this.MasksChart.SaveImage(x.FileName, ChartImageFormat.Jpeg); }
             catch { }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                image = new Image<Bgra, byte>(dialog.FileName);
+                MasksPictureBox.Image = image.ToBitmap();
+                Tools.Histogram(MasksChart, (Bitmap)MasksPictureBox.Image);
+            }
         }
     }
 }

@@ -36,8 +36,6 @@ namespace APO
             rgb = false;
         }
 
-        
-
         private void Enableing()
         {
             histogramToolStripMenuItem1.Enabled = true;
@@ -52,51 +50,15 @@ namespace APO
 // ######################################## Histogram ###########################################################################
         private void GreyHistogramMenuStripItem_Click(object sender, EventArgs e)
         {
-            
-            Dictionary<Color, int> map = Tools.HistogramMap((Bitmap)PictureBox.Image);
-            int[] GrayLut = Tools.HistogramLUT(map);
-            int sum = 0;
-            PictureWindowChart.Series.Add("Gray");
-            PictureWindowChart.Series["Gray"].Color = Color.Gray;
-            for (int i = 0; i < GrayLut.Length; i++)
-            {
-                this.PictureWindowChart.Series["Gray"].Points.AddXY(i, GrayLut[i]);
-                sum += GrayLut[i];
-            }
 
-            Enableing();
-            PixelsTextBox.Text = sum.ToString();
+            Tools.HistogramGray(PictureWindowChart, (Bitmap)PictureBox.Image);
+            //PixelsTextBox.Text = sum.ToString();
             gray = true;
         }
 
-
-
         private void AllinOneMenuStripItem_Click(object sender, EventArgs e)
         {
-            Dictionary<Color,int> map = Tools.HistogramMap((Bitmap)PictureBox.Image);
-            int[] RedLut = Tools.HistogramLUT(map,"red");
-            int[] GreenLut = Tools.HistogramLUT(map,"green");
-            int[] BlueLut = Tools.HistogramLUT(map,"blue");
-            int sum = 0;
-
-            PictureWindowChart.Series.Add("Red");
-            PictureWindowChart.Series.Add("Blue");
-            PictureWindowChart.Series.Add("Green");
-            PictureWindowChart.Series["Red"].Color = Color.Red;
-            PictureWindowChart.Series["Blue"].Color = Color.Blue;
-            PictureWindowChart.Series["Green"].Color = Color.Green;
-
-            for (int i = 0; i < RedLut.Length; i++)
-            {
-                this.PictureWindowChart.Series["Red"].Points.AddXY(i, RedLut[i]);
-                this.PictureWindowChart.Series["Green"].Points.AddXY(i, GreenLut[i]);
-                this.PictureWindowChart.Series["Blue"].Points.AddXY(i, BlueLut[i]);
-                sum += RedLut[i];
-            }
-
-            Enableing();
-            PixelsTextBox.Text = sum.ToString();
-            rgb = true;
+            Tools.Histogram(PictureWindowChart, (Bitmap)PictureBox.Image);
         }
 
 // ######################################## Duplicate ###########################################################################
@@ -141,40 +103,13 @@ namespace APO
         {
             if (gray)
             {
-                
                 PictureBox.Image = Equalization.EqualGray((Bitmap)PictureBox.Image);
-                Dictionary<Color, int> map = Tools.HistogramMap((Bitmap)PictureBox.Image);
-                int[] GrayLut = Tools.HistogramLUT(map);
-                PictureWindowChart.Series.Clear();
-                PictureWindowChart.Series.Add("Equal");
-                PictureWindowChart.Series["Equal"].Color = Color.Violet;
-                for (int i = 0; i < GrayLut.Length; i++)
-                {
-                    this.PictureWindowChart.Series["Equal"].Points.AddXY(i, GrayLut[i]);
-                }
+                Tools.HistogramGray(PictureWindowChart, (Bitmap)PictureBox.Image);
             }
             if (rgb)
             {
                 PictureBox.Image = Equalization.EqualRGB((Bitmap)PictureBox.Image);
-                Dictionary<Color, int> map = Tools.HistogramMap((Bitmap)PictureBox.Image);
-                int[] RedLut = Tools.HistogramLUT(map, "red");
-                int[] GreenLut = Tools.HistogramLUT(map, "green");
-                int[] BlueLut = Tools.HistogramLUT(map, "blue");
-
-                PictureWindowChart.Series.Clear();
-                PictureWindowChart.Series.Add("Red");
-                PictureWindowChart.Series.Add("Blue");
-                PictureWindowChart.Series.Add("Green");
-                PictureWindowChart.Series["Red"].Color = Color.Red;
-                PictureWindowChart.Series["Blue"].Color = Color.Blue;
-                PictureWindowChart.Series["Green"].Color = Color.Green;
-
-                for (int i = 0; i < RedLut.Length; i++)
-                {
-                    this.PictureWindowChart.Series["Red"].Points.AddXY(i, RedLut[i]);
-                    this.PictureWindowChart.Series["Green"].Points.AddXY(i, GreenLut[i]);
-                    this.PictureWindowChart.Series["Blue"].Points.AddXY(i, BlueLut[i]);
-                }
+                Tools.Histogram(PictureWindowChart, (Bitmap)PictureBox.Image);
 
             }
         }
@@ -183,39 +118,12 @@ namespace APO
             if (gray)
             {
                 PictureBox.Image = Equalization.SelectiveEqualGray((Bitmap)PictureBox.Image);
-                Dictionary<Color, int> map = Tools.HistogramMap((Bitmap)PictureBox.Image);
-                int[] GrayLut = Tools.HistogramLUT(map);
-                PictureWindowChart.Series.Clear();
-                PictureWindowChart.Series.Add("Gray");
-                PictureWindowChart.Series["Gray"].Color = Color.Violet;
-                for (int i = 0; i < GrayLut.Length; i++)
-                {
-                    this.PictureWindowChart.Series["Gray"].Points.AddXY(i, GrayLut[i]);
-                }
+                Tools.HistogramGray(PictureWindowChart, (Bitmap)PictureBox.Image);
             }
             if (rgb)
             {
                 PictureBox.Image = Equalization.SelectiveEqualRGB((Bitmap)PictureBox.Image);
-                Dictionary<Color, int> map = Tools.HistogramMap((Bitmap)PictureBox.Image);
-                int[] RedLut = Tools.HistogramLUT(map, "red");
-                int[] GreenLut = Tools.HistogramLUT(map, "green");
-                int[] BlueLut = Tools.HistogramLUT(map, "blue");
-
-                PictureWindowChart.Series.Clear();
-                PictureWindowChart.Series.Add("Red");
-                PictureWindowChart.Series.Add("Blue");
-                PictureWindowChart.Series.Add("Green");
-                PictureWindowChart.Series["Red"].Color = Color.Red;
-                PictureWindowChart.Series["Blue"].Color = Color.Blue;
-                PictureWindowChart.Series["Green"].Color = Color.Green;
-
-                for (int i = 0; i < RedLut.Length; i++)
-                {
-                    this.PictureWindowChart.Series["Red"].Points.AddXY(i, RedLut[i]);
-                    this.PictureWindowChart.Series["Green"].Points.AddXY(i, GreenLut[i]);
-                    this.PictureWindowChart.Series["Blue"].Points.AddXY(i, BlueLut[i]);
-                }
-
+                Tools.Histogram(PictureWindowChart, (Bitmap)PictureBox.Image);
             }
 
 
@@ -225,94 +133,26 @@ namespace APO
         private void NegationButton_Click(object sender, EventArgs e)
         {
             PictureBox.Image = Operations.Negation((Bitmap)PictureBox.Image);
-
-            Dictionary<Color, int> map = Tools.HistogramMap((Bitmap)PictureBox.Image);
-            int[] RedLut = Tools.HistogramLUT(map, "red");
-            int[] GreenLut = Tools.HistogramLUT(map, "green");
-            int[] BlueLut = Tools.HistogramLUT(map, "blue");
-
-            PictureWindowChart.Series.Clear();
-            PictureWindowChart.Series.Add("Red");
-            PictureWindowChart.Series.Add("Blue");
-            PictureWindowChart.Series.Add("Green");
-            PictureWindowChart.Series["Red"].Color = Color.Red;
-            PictureWindowChart.Series["Blue"].Color = Color.Blue;
-            PictureWindowChart.Series["Green"].Color = Color.Green;
-
-            for (int i = 0; i < RedLut.Length; i++)
-            {
-                this.PictureWindowChart.Series["Red"].Points.AddXY(i, RedLut[i]);
-                this.PictureWindowChart.Series["Green"].Points.AddXY(i, GreenLut[i]);
-                this.PictureWindowChart.Series["Blue"].Points.AddXY(i, BlueLut[i]);
-            }
+            Tools.Histogram(PictureWindowChart, (Bitmap)PictureBox.Image);
         }
 // ######################################## Thresholding ###########################################################################
         private void ThresholdingButton_Click(object sender, EventArgs e)
         {
             PictureBox.Image = Operations.Thresholding((Bitmap)PictureBox.Image,Convert.ToInt32(P1TextBox.Text));
-            Dictionary<Color, int> map = Tools.HistogramMap((Bitmap)PictureBox.Image);
-            int[] GrayLut = Tools.HistogramLUT(map);
-            PictureWindowChart.Series.Clear();
-            PictureWindowChart.Series.Add("Gray");
-            PictureWindowChart.Series["Gray"].Color = Color.Violet;
-            for (int i = 0; i < GrayLut.Length; i++)
-            {
-                this.PictureWindowChart.Series["Gray"].Points.AddXY(i, GrayLut[i]);
-            }
+            Tools.HistogramGray(PictureWindowChart, (Bitmap)PictureBox.Image);
         }
 
         private void DiffrentThresholdingButton_Click(object sender, EventArgs e)
         {
             PictureBox.Image = Operations.Thresholding2((Bitmap)PictureBox.Image, Convert.ToInt32(P1TextBox.Text), Convert.ToInt32(P2TextBox.Text));
-            Dictionary<Color, int> map = Tools.HistogramMap((Bitmap)PictureBox.Image);
-            int[] GrayLut = Tools.HistogramLUT(map);
-            PictureWindowChart.Series.Clear();
-            PictureWindowChart.Series.Add("Gray");
-            PictureWindowChart.Series["Gray"].Color = Color.Violet;
-            for (int i = 0; i < GrayLut.Length; i++)
-            {
-                this.PictureWindowChart.Series["Gray"].Points.AddXY(i, GrayLut[i]);
-            }
+            Tools.HistogramGray(PictureWindowChart, (Bitmap)PictureBox.Image);
         }
 // ######################################## Reduction ###########################################################################
         private void ReductionButton_Click(object sender, EventArgs e)
         {
             PictureBox.Image = Operations.Reduction((Bitmap)PictureBox.Image, (int)GrayLevelsUpDown.Value);
-            Dictionary<Color, int> map = Tools.HistogramMap((Bitmap)PictureBox.Image);
-
-            if (gray)
-            {
-                int[] GrayLut = Tools.HistogramLUT(map);
-                PictureWindowChart.Series.Clear();
-                PictureWindowChart.Series.Add("Gray");
-                PictureWindowChart.Series["Gray"].Color = Color.Gray;
-                for (int i = 0; i < GrayLut.Length; i++)
-                {
-                    this.PictureWindowChart.Series["Gray"].Points.AddXY(i, GrayLut[i]);
-                }
-            }
-            if (rgb)
-            {
-                int[] RedLut = Tools.HistogramLUT(map, "red");
-                int[] GreenLut = Tools.HistogramLUT(map, "green");
-                int[] BlueLut = Tools.HistogramLUT(map, "blue");
-
-                PictureWindowChart.Series.Clear();
-                PictureWindowChart.Series.Add("Red");
-                PictureWindowChart.Series.Add("Blue");
-                PictureWindowChart.Series.Add("Green");
-                PictureWindowChart.Series["Red"].Color = Color.Red;
-                PictureWindowChart.Series["Blue"].Color = Color.Blue;
-                PictureWindowChart.Series["Green"].Color = Color.Green;
-
-                for (int i = 0; i < RedLut.Length; i++)
-                {
-                    this.PictureWindowChart.Series["Red"].Points.AddXY(i, RedLut[i]);
-                    this.PictureWindowChart.Series["Green"].Points.AddXY(i, GreenLut[i]);
-                    this.PictureWindowChart.Series["Blue"].Points.AddXY(i, BlueLut[i]);
-                }
-
-            }
+            if (gray){Tools.HistogramGray(PictureWindowChart, (Bitmap)PictureBox.Image);}
+            if (rgb){Tools.Histogram(PictureWindowChart, (Bitmap)PictureBox.Image);}
         }
 
         
@@ -330,7 +170,6 @@ namespace APO
         }
 
         
-
         private void neighborhoodOperationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Image<Bgra, byte> image = bitmap.ToImage<Bgra, byte>();
@@ -338,6 +177,8 @@ namespace APO
             operationsForm.Show();
             this.Close();
         }
+
+        
     }
 }
 

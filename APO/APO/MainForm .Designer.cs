@@ -34,6 +34,8 @@
             this.MenuItemOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.binaryOperationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.morfologicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.neighborhoodOperationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.masksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,7 +44,9 @@
             this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.binaryOperationsToolStripMenuItem,
-            this.morfologicalToolStripMenuItem});
+            this.morfologicalToolStripMenuItem,
+            this.neighborhoodOperationsToolStripMenuItem,
+            this.masksToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
             this.MenuStrip.Size = new System.Drawing.Size(1446, 24);
@@ -78,6 +82,20 @@
             this.morfologicalToolStripMenuItem.Text = "Morfological ";
             this.morfologicalToolStripMenuItem.Click += new System.EventHandler(this.morfologicalToolStripMenuItem_Click);
             // 
+            // neighborhoodOperationsToolStripMenuItem
+            // 
+            this.neighborhoodOperationsToolStripMenuItem.Name = "neighborhoodOperationsToolStripMenuItem";
+            this.neighborhoodOperationsToolStripMenuItem.Size = new System.Drawing.Size(158, 20);
+            this.neighborhoodOperationsToolStripMenuItem.Text = "Neighborhood Operations";
+            this.neighborhoodOperationsToolStripMenuItem.Click += new System.EventHandler(this.neighborhoodOperationsToolStripMenuItem_Click);
+            // 
+            // masksToolStripMenuItem
+            // 
+            this.masksToolStripMenuItem.Name = "masksToolStripMenuItem";
+            this.masksToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.masksToolStripMenuItem.Text = "Masks";
+            this.masksToolStripMenuItem.Click += new System.EventHandler(this.masksToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -104,6 +122,8 @@
         private System.Windows.Forms.ToolStripMenuItem MenuItemOpen;
         private System.Windows.Forms.ToolStripMenuItem binaryOperationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem morfologicalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem neighborhoodOperationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem masksToolStripMenuItem;
     }
 }
 

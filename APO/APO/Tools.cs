@@ -106,9 +106,46 @@ namespace APO
             return LUT;
         }
 
+        public static void Histogram(Chart chart, Bitmap bitmap)
+        {
+            Dictionary<Color, int> map = Tools.HistogramMap(bitmap);
+            int[] RedLut = Tools.HistogramLUT(map, "red");
+            int[] GreenLut = Tools.HistogramLUT(map, "green");
+            int[] BlueLut = Tools.HistogramLUT(map, "blue");
+
+            chart.Series.Clear();
+            chart.Series.Add("Red");
+            chart.Series.Add("Blue");
+            chart.Series.Add("Green");
+            chart.Series["Red"].Color = Color.Red;
+            chart.Series["Blue"].Color = Color.Blue;
+            chart.Series["Green"].Color = Color.Green;
+
+            for (int i = 0; i < RedLut.Length; i++)
+            {
+                chart.Series["Red"].Points.AddXY(i, RedLut[i]);
+                chart.Series["Green"].Points.AddXY(i, GreenLut[i]);
+                chart.Series["Blue"].Points.AddXY(i, BlueLut[i]);
+
+            }
+        }
+        public static void HistogramGray(Chart chart, Bitmap bitmap)
+        {
+            Dictionary<Color, int> map = Tools.HistogramMap(bitmap);
+            int[] GrayLut = Tools.HistogramLUT(map);
+            chart.Series.Clear();
+            chart.Series.Add("Gray");
+            chart.Series["Gray"].Color = Color.Violet;
+            for (int i = 0; i < GrayLut.Length; i++)
+            {
+                chart.Series["Gray"].Points.AddXY(i, GrayLut[i]);
+            }
+        }
         
 
-       
+
+
+
 
 
 

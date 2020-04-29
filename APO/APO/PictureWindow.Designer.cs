@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GreyHistogramMenuStripItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -153,10 +153,10 @@
             // 
             this.PictureWindowChart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.Name = "ChartArea1";
-            this.PictureWindowChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.PictureWindowChart.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.PictureWindowChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.PictureWindowChart.Legends.Add(legend2);
             this.PictureWindowChart.Location = new System.Drawing.Point(649, 27);
             this.PictureWindowChart.Name = "PictureWindowChart";
             this.PictureWindowChart.Size = new System.Drawing.Size(625, 300);

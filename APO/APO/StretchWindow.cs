@@ -55,39 +55,13 @@ namespace APO
                 Bitmap bitmap = Stretching.StretchGray((Bitmap)StretchWindowPictureBox.Image, TrackBarMax.Value, TrackBarMin.Value);
                 StretchWindowPictureBox.Image = bitmap;
 
-                Dictionary<Color, int> map = Tools.HistogramMap((Bitmap)StretchWindowPictureBox.Image);
-                int[] GrayLut = Tools.HistogramLUT(map);
-                StretchWindowChart.Series.Clear();
-                StretchWindowChart.Series.Add("Gray");
-                StretchWindowChart.Series["Gray"].Color = Color.Gray;
-                for (int i = 0; i < GrayLut.Length; i++)
-                {
-                    this.StretchWindowChart.Series["Gray"].Points.AddXY(i, GrayLut[i]);
-                }
+                Tools.HistogramGray(StretchWindowChart, (Bitmap)StretchWindowPictureBox.Image);
             }
             if (this.pictureWindow.rgb)
             {
                 StretchWindowPictureBox.Image = Stretching.StretchRGB((Bitmap)StretchWindowPictureBox.Image, TrackBarMax.Value, TrackBarMin.Value);
 
-                Dictionary<Color, int> map = Tools.HistogramMap((Bitmap)StretchWindowPictureBox.Image);
-                int[] RedLut = Tools.HistogramLUT(map, "red");
-                int[] GreenLut = Tools.HistogramLUT(map, "green");
-                int[] BlueLut = Tools.HistogramLUT(map, "blue");
-
-                StretchWindowChart.Series.Clear();
-                StretchWindowChart.Series.Add("Red");
-                StretchWindowChart.Series.Add("Blue");
-                StretchWindowChart.Series.Add("Green");
-                StretchWindowChart.Series["Red"].Color = Color.Red;
-                StretchWindowChart.Series["Blue"].Color = Color.Blue;
-                StretchWindowChart.Series["Green"].Color = Color.Green;
-
-                for (int i = 0; i < RedLut.Length; ++i)
-                {
-                    this.StretchWindowChart.Series["Red"].Points.AddXY(i, RedLut[i]);
-                    this.StretchWindowChart.Series["Green"].Points.AddXY(i, GreenLut[i]);
-                    this.StretchWindowChart.Series["Blue"].Points.AddXY(i, BlueLut[i]);
-                }
+                Tools.Histogram(StretchWindowChart, (Bitmap)StretchWindowPictureBox.Image);
             }
         }
 
@@ -97,38 +71,12 @@ namespace APO
 
             if (this.pictureWindow.gray)
             {
-                Dictionary<Color, int> map = Tools.HistogramMap((Bitmap)this.pictureWindow.bitmap);
-                int[] GrayLut = Tools.HistogramLUT(map);
-                StretchWindowChart.Series.Clear();
-                StretchWindowChart.Series.Add("Gray");
-                StretchWindowChart.Series["Gray"].Color = Color.Gray;
-                for (int i = 0; i < GrayLut.Length; i++)
-                {
-                    this.StretchWindowChart.Series["Gray"].Points.AddXY(i, GrayLut[i]);
-                }
+                Tools.HistogramGray(StretchWindowChart, (Bitmap)StretchWindowPictureBox.Image);
             }
 
             if (this.pictureWindow.rgb)
             {
-                Dictionary<Color, int> map = Tools.HistogramMap((Bitmap)this.pictureWindow.bitmap);
-                int[] RedLut = Tools.HistogramLUT(map, "red");
-                int[] GreenLut = Tools.HistogramLUT(map, "green");
-                int[] BlueLut = Tools.HistogramLUT(map, "blue");
-
-                StretchWindowChart.Series.Clear();
-                StretchWindowChart.Series.Add("Red");
-                StretchWindowChart.Series.Add("Blue");
-                StretchWindowChart.Series.Add("Green");
-                StretchWindowChart.Series["Red"].Color = Color.Red;
-                StretchWindowChart.Series["Blue"].Color = Color.Blue;
-                StretchWindowChart.Series["Green"].Color = Color.Green;
-
-                for (int i = 0; i < RedLut.Length; i++)
-                {
-                    this.StretchWindowChart.Series["Red"].Points.AddXY(i, RedLut[i]);
-                    this.StretchWindowChart.Series["Green"].Points.AddXY(i, GreenLut[i]);
-                    this.StretchWindowChart.Series["Blue"].Points.AddXY(i, BlueLut[i]);
-                }
+                Tools.Histogram(StretchWindowChart, (Bitmap)StretchWindowPictureBox.Image);
             }
 
             TrackBarMax.Value = 255;

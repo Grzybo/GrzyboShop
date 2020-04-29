@@ -26,9 +26,14 @@ namespace APO
             this.image = image;
             this.inputImage = image;
             PictureBox.Image = image.ToBitmap();
-            Histogram();
-            
+            Tools.Histogram(NeighborhoodChart, (Bitmap)PictureBox.Image);
+
         }
+        public NeighborhoodOperationsForm()
+        {
+            InitializeComponent();
+        }
+
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -39,7 +44,7 @@ namespace APO
                 image = new Image<Bgra, byte>(dialog.FileName);
                 inputImage = image;
                 PictureBox.Image = image.ToBitmap();
-                Histogram();
+                Tools.Histogram(NeighborhoodChart, (Bitmap)PictureBox.Image);
             }
         }
 
@@ -50,7 +55,7 @@ namespace APO
                 Image<Bgra, byte> dst = new Image<Bgra, byte>(PictureBox.Size.Width, PictureBox.Size.Height);
                 dst = image.SmoothGaussian(13);
                 PictureBox.Image = dst.ToBitmap();
-                Histogram();
+                Tools.Histogram(NeighborhoodChart, (Bitmap)PictureBox.Image);
             }
         }
 
@@ -72,7 +77,7 @@ namespace APO
                 Image<Gray, byte> imageCanny = new Image<Gray, byte>(image.Width, image.Height, new Gray(0));
                 imageCanny = image.Canny(20, 50);
                 PictureBox.Image = imageCanny.ToBitmap();
-                Histogram();
+                Tools.Histogram(NeighborhoodChart, (Bitmap)PictureBox.Image);
             }
         }
 
@@ -84,7 +89,7 @@ namespace APO
                 Image<Gray, byte> imageGray = image.Convert<Gray, byte>();
                 Image<Gray, float> imageSobel = imageGray.Sobel(0, 1, 3).Add(imageGray.Sobel(1, 0, 3)).AbsDiff(new Gray(0.0));
                 PictureBox.Image = imageSobel.ToBitmap();
-                Histogram();
+                Tools.Histogram(NeighborhoodChart, (Bitmap)PictureBox.Image);
 
 
                 //Image<Gray, byte> gray = new Image<Gray, byte>(@"C:\Users\Public\Pictures\Sample Pictures\1.jpg");
@@ -105,14 +110,14 @@ namespace APO
 
                 imageLaplacian = imageGray.Laplace(7);
                 PictureBox.Image = imageLaplacian.ToBitmap();
-                Histogram();
+                Tools.Histogram(NeighborhoodChart, (Bitmap)PictureBox.Image);
             }
         }
 
         private void resetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PictureBox.Image = inputImage.ToBitmap();
-            Histogram();
+            Tools.Histogram(NeighborhoodChart, (Bitmap)PictureBox.Image);
         }
 
         private void masksToolStripMenuItem_Click(object sender, EventArgs e)
@@ -132,29 +137,7 @@ namespace APO
             pictureWindow.Show();
             this.Close();
         }
-        private void Histogram()
-        {
-            Dictionary<Color, int> map = Tools.HistogramMap((Bitmap)PictureBox.Image);
-            int[] RedLut = Tools.HistogramLUT(map, "red");
-            int[] GreenLut = Tools.HistogramLUT(map, "green");
-            int[] BlueLut = Tools.HistogramLUT(map, "blue");
-
-            NeighborhoodChart.Series.Clear();
-            NeighborhoodChart.Series.Add("Red");
-            NeighborhoodChart.Series.Add("Blue");
-            NeighborhoodChart.Series.Add("Green");
-            NeighborhoodChart.Series["Red"].Color = Color.Red;
-            NeighborhoodChart.Series["Blue"].Color = Color.Blue;
-            NeighborhoodChart.Series["Green"].Color = Color.Green;
-
-            for (int i = 0; i < RedLut.Length; i++)
-            {
-                this.NeighborhoodChart.Series["Red"].Points.AddXY(i, RedLut[i]);
-                this.NeighborhoodChart.Series["Green"].Points.AddXY(i, GreenLut[i]);
-                this.NeighborhoodChart.Series["Blue"].Points.AddXY(i, BlueLut[i]);
-
-            }
-        }
+        
 
         private void histogramToolStripMenuItem_Click(object sender, EventArgs e)
         {

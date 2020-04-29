@@ -42,11 +42,7 @@ namespace APO
         }
 
 
-        private void ąsiedztwaToolStripMenuItem_Click(object sender, EventArgs e)
-        { 
-            //NeighborhoodOperationsForm operationsForm = new NeighborhoodOperationsForm();
-            //operationsForm.Show();
-        }
+        
 
         private void binaryOperationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -58,6 +54,18 @@ namespace APO
         {
             MorphologicalOperationsForm morphologicalOperationsForm = new MorphologicalOperationsForm();
             morphologicalOperationsForm.Show();
+        }
+
+        private void neighborhoodOperationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NeighborhoodOperationsForm form = new NeighborhoodOperationsForm();
+            form.Show();
+        }
+
+        private void masksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MasksForm form = new MasksForm();
+            form.Show();
         }
     }
 

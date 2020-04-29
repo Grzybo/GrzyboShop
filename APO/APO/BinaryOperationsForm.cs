@@ -34,7 +34,7 @@ namespace APO
                 ImageA_PictureBox.Image = new Bitmap(dialog.FileName);
                 Bitmap bitmapA = (Bitmap)ImageA_PictureBox.Image;
                 this.imageA = bitmapA.ToImage<Bgra, byte>();
-                Histogram_ImageA();
+                Tools.Histogram(ImageA_Chart, (Bitmap)ImageA_PictureBox.Image);
             }
             catch
             {
@@ -52,7 +52,7 @@ namespace APO
                 ImageB_PictureBox.Image = new Bitmap(dialog.FileName);
                 Bitmap bitmapB = (Bitmap)ImageB_PictureBox.Image;
                 this.imageB = bitmapB.ToImage<Bgra, byte>();
-                Histogram_ImageB();
+                Tools.Histogram(ImageB_Chart, (Bitmap)ImageB_PictureBox.Image);
             }
             catch
             {
@@ -75,7 +75,7 @@ namespace APO
                 //resultImage = imageA.Not();
                 CvInvoke.BitwiseNot(imageA, resultImage);
                 ResultImagePictureBox.Image = resultImage.ToBitmap();
-                Histogram_ResultImage();
+                Tools.Histogram(BinaryOperationsChart, (Bitmap)ResultImagePictureBox.Image);
                 return;
             }
 
@@ -92,7 +92,7 @@ namespace APO
                 CvInvoke.Resize(imageB, imageBresized, imageA.Size);
                 resultImage = imageA.Add(imageBresized, null);
                 ResultImagePictureBox.Image = resultImage.ToBitmap();
-                Histogram_ResultImage();
+                Tools.Histogram(BinaryOperationsChart, (Bitmap)ResultImagePictureBox.Image);
                 return;
             }
             if (BlendRadioButton.Checked)
@@ -103,7 +103,7 @@ namespace APO
                 resultImage = imageA.AddWeighted(imageBresized, 0.5, 1-0.5, 0);
                 //CvInvoke.BlendLinear(imageA, imageBresized, null, null, resultImage);
                 ResultImagePictureBox.Image = resultImage.ToBitmap();
-                Histogram_ResultImage();
+                Tools.Histogram(BinaryOperationsChart, (Bitmap)ResultImagePictureBox.Image);
                 return;
             }
             if (AndRadioButton.Checked)
@@ -113,7 +113,7 @@ namespace APO
                 CvInvoke.Resize(imageB, imageBresized, imageA.Size);
                 resultImage = imageA.And(imageBresized, null);
                 ResultImagePictureBox.Image = resultImage.ToBitmap();
-                Histogram_ResultImage();
+                Tools.Histogram(BinaryOperationsChart, (Bitmap)ResultImagePictureBox.Image);
                 return;
             }
             if (OrRadioButton.Checked)
@@ -123,7 +123,7 @@ namespace APO
                 CvInvoke.Resize(imageB, imageBresized, imageA.Size);
                 resultImage = imageA.Or(imageBresized, null);
                 ResultImagePictureBox.Image = resultImage.ToBitmap();
-                Histogram_ResultImage();
+                Tools.Histogram(BinaryOperationsChart, (Bitmap)ResultImagePictureBox.Image);
                 return;
             }
             if (XorRadioButton.Checked)
@@ -134,80 +134,13 @@ namespace APO
                 resultImage = imageA.Xor(imageBresized);
                 //CvInvoke.BitwiseXor(imageA, imageBresized, resultImage);
                 ResultImagePictureBox.Image = resultImage.ToBitmap();
-                Histogram_ResultImage();
+                Tools.Histogram(BinaryOperationsChart, (Bitmap)ResultImagePictureBox.Image);
             }
             
 
         }
-        private void Histogram_ResultImage()
-        {
-            Dictionary<Color, int> map = Tools.HistogramMap((Bitmap)ResultImagePictureBox.Image);
-            int[] RedLut = Tools.HistogramLUT(map, "red");
-            int[] GreenLut = Tools.HistogramLUT(map, "green");
-            int[] BlueLut = Tools.HistogramLUT(map, "blue");
-
-            BinaryOperationsChart.Series.Clear();
-            BinaryOperationsChart.Series.Add("Red");
-            BinaryOperationsChart.Series.Add("Blue");
-            BinaryOperationsChart.Series.Add("Green");
-            BinaryOperationsChart.Series["Red"].Color = Color.Red;
-            BinaryOperationsChart.Series["Blue"].Color = Color.Blue;
-            BinaryOperationsChart.Series["Green"].Color = Color.Green;
-
-            for (int i = 0; i < RedLut.Length; i++)
-            {
-                this.BinaryOperationsChart.Series["Red"].Points.AddXY(i, RedLut[i]);
-                this.BinaryOperationsChart.Series["Green"].Points.AddXY(i, GreenLut[i]);
-                this.BinaryOperationsChart.Series["Blue"].Points.AddXY(i, BlueLut[i]);
-
-            }
-        }
-        private void Histogram_ImageA()
-        {
-            Dictionary<Color, int> map = Tools.HistogramMap((Bitmap)ImageA_PictureBox.Image);
-            int[] RedLut = Tools.HistogramLUT(map, "red");
-            int[] GreenLut = Tools.HistogramLUT(map, "green");
-            int[] BlueLut = Tools.HistogramLUT(map, "blue");
-
-            ImageA_Chart.Series.Clear();
-            ImageA_Chart.Series.Add("Red");
-            ImageA_Chart.Series.Add("Blue");
-            ImageA_Chart.Series.Add("Green");
-            ImageA_Chart.Series["Red"].Color = Color.Red;
-            ImageA_Chart.Series["Blue"].Color = Color.Blue;
-            ImageA_Chart.Series["Green"].Color = Color.Green;
-
-            for (int i = 0; i < RedLut.Length; i++)
-            {
-                this.ImageA_Chart.Series["Red"].Points.AddXY(i, RedLut[i]);
-                this.ImageA_Chart.Series["Green"].Points.AddXY(i, GreenLut[i]);
-                this.ImageA_Chart.Series["Blue"].Points.AddXY(i, BlueLut[i]);
-
-            }
-        }
-        private void Histogram_ImageB()
-        {
-            Dictionary<Color, int> map = Tools.HistogramMap((Bitmap)ImageB_PictureBox.Image);
-            int[] RedLut = Tools.HistogramLUT(map, "red");
-            int[] GreenLut = Tools.HistogramLUT(map, "green");
-            int[] BlueLut = Tools.HistogramLUT(map, "blue");
-
-            ImageB_Chart.Series.Clear();
-            ImageB_Chart.Series.Add("Red");
-            ImageB_Chart.Series.Add("Blue");
-            ImageB_Chart.Series.Add("Green");
-            ImageB_Chart.Series["Red"].Color = Color.Red;
-            ImageB_Chart.Series["Blue"].Color = Color.Blue;
-            ImageB_Chart.Series["Green"].Color = Color.Green;
-
-            for (int i = 0; i < RedLut.Length; i++)
-            {
-                this.ImageB_Chart.Series["Red"].Points.AddXY(i, RedLut[i]);
-                this.ImageB_Chart.Series["Green"].Points.AddXY(i, GreenLut[i]);
-                this.ImageB_Chart.Series["Blue"].Points.AddXY(i, BlueLut[i]);
-
-            }
-        }
+        
+        
 
         private void imageToolStripMenuItem_Click(object sender, EventArgs e)
         {
