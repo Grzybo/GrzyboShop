@@ -28,6 +28,7 @@ namespace APO
             MasksPictureBox.Image = image.ToBitmap();
             this.image = image;
             Tools.Histogram(MasksChart, (Bitmap)MasksPictureBox.Image);
+            Checked3x3();
 
             /*
             TextBox[,] grid = new TextBox[,]
@@ -46,6 +47,7 @@ namespace APO
         public MasksForm()
         {
             InitializeComponent();
+            Checked3x3();
         }
 
         private void Execute_Click(object sender, EventArgs e)
@@ -62,10 +64,10 @@ namespace APO
             }
 
             ConvolutionKernelF kernel = new ConvolutionKernelF(k);
-            Image<Gray, float> imageFiltered = new Image<Gray, float>(image.Width, image.Height);
+            Image<Gray, byte> imageFiltered = new Image<Gray, byte>(image.Width, image.Height);
             Image<Gray, byte> imageGray = image.Convert<Gray, byte>();
-            CvInvoke.Filter2D(imageGray, imageFiltered, kernel, new Point(-1, -1), 0, borderType);
-            //Image<Gray, float> imageFiltered = imageGray * kernel;
+            CvInvoke.Filter2D(imageGray, imageFiltered, kernel, new Point(-1, -1), 0, borderType); 
+            
             MasksPictureBox.Image = imageFiltered.ToBitmap();
 
             Tools.Histogram(MasksChart, (Bitmap)MasksPictureBox.Image);
@@ -349,6 +351,11 @@ namespace APO
                 MasksPictureBox.Image = image.ToBitmap();
                 Tools.Histogram(MasksChart, (Bitmap)MasksPictureBox.Image);
             }
+        }
+
+        private void ConvolutionButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

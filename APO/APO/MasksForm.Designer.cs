@@ -103,13 +103,14 @@
             this.ReflectRadioButton = new System.Windows.Forms.RadioButton();
             this.IsolatedRadioButton = new System.Windows.Forms.RadioButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MasksChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ConvolutionButton = new System.Windows.Forms.Button();
             this.NxMGroupBox.SuspendLayout();
             this.SharpeningGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MasksPictureBox)).BeginInit();
@@ -780,7 +781,7 @@
             this.groupBox2.Controls.Add(this.IsolatedRadioButton);
             this.groupBox2.Location = new System.Drawing.Point(12, 276);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(204, 89);
+            this.groupBox2.Size = new System.Drawing.Size(114, 89);
             this.groupBox2.TabIndex = 67;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Edge Pixel Values";
@@ -833,6 +834,21 @@
             this.menuStrip1.TabIndex = 68;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.openToolStripMenuItem.Text = "Open ";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -878,26 +894,22 @@
             this.MasksChart.TabIndex = 69;
             this.MasksChart.Text = "chart1";
             // 
-            // fileToolStripMenuItem
+            // ConvolutionButton
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.openToolStripMenuItem.Text = "Open ";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            this.ConvolutionButton.Location = new System.Drawing.Point(132, 310);
+            this.ConvolutionButton.Name = "ConvolutionButton";
+            this.ConvolutionButton.Size = new System.Drawing.Size(84, 29);
+            this.ConvolutionButton.TabIndex = 70;
+            this.ConvolutionButton.Text = "Convolution";
+            this.ConvolutionButton.UseVisualStyleBackColor = true;
+            this.ConvolutionButton.Visible = false;
             // 
             // MasksForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1378, 512);
+            this.Controls.Add(this.ConvolutionButton);
             this.Controls.Add(this.MasksChart);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -1055,5 +1067,6 @@
         private System.Windows.Forms.ToolStripMenuItem histogramToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.Button ConvolutionButton;
     }
 }

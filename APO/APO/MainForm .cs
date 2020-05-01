@@ -86,6 +86,9 @@ namespace APO
      *  maski - 3x3 5x5 7x7 interaktywne , prewitt, wyostrzanie i wybór na krawędziech 
      *  operacje dwu agrumentowe - add, and, or, blend ( xor i not nie działa XD  )
      *      LAB4: 
+     *  Erozja, dylacja, otwieranie i zamykanie
+     *  szkeiletyzacja 
+     *  BEZ CONWOLUCJII - filtrowanmie jednym etapem, bez twozrenia 5x5 z dwóch 3x3
      *  
      * 
      * DODATKOWE: 
