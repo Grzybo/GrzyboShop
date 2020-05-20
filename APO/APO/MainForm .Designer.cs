@@ -36,6 +36,7 @@
             this.morfologicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.neighborhoodOperationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.masksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.segmentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,7 +47,8 @@
             this.binaryOperationsToolStripMenuItem,
             this.morfologicalToolStripMenuItem,
             this.neighborhoodOperationsToolStripMenuItem,
-            this.masksToolStripMenuItem});
+            this.masksToolStripMenuItem,
+            this.segmentationToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
             this.MenuStrip.Size = new System.Drawing.Size(1446, 24);
@@ -96,6 +98,13 @@
             this.masksToolStripMenuItem.Text = "Masks";
             this.masksToolStripMenuItem.Click += new System.EventHandler(this.masksToolStripMenuItem_Click);
             // 
+            // segmentationToolStripMenuItem
+            // 
+            this.segmentationToolStripMenuItem.Name = "segmentationToolStripMenuItem";
+            this.segmentationToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
+            this.segmentationToolStripMenuItem.Text = "Segmentation";
+            this.segmentationToolStripMenuItem.Click += new System.EventHandler(this.segmentationToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -124,6 +133,7 @@
         private System.Windows.Forms.ToolStripMenuItem morfologicalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem neighborhoodOperationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem masksToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem segmentationToolStripMenuItem;
     }
 }
 

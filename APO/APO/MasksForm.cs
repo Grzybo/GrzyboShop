@@ -11,6 +11,7 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.Util;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Runtime.Remoting.Messaging;
 
 namespace APO
 {
@@ -19,18 +20,30 @@ namespace APO
         public Image<Bgra, byte> image;
         private Emgu.CV.CvEnum.BorderType borderType = Emgu.CV.CvEnum.BorderType.Isolated;
 
-        //TextBox[,] grid = new TextBox[7,7];
+        TextBox[,] grid;
 
         public MasksForm(Image<Bgra, byte> image)
         {
             InitializeComponent();
+            this.grid = MakeGrid();
             RadioButtonChange();
             MasksPictureBox.Image = image.ToBitmap();
             this.image = image;
             Tools.Histogram(MasksChart, (Bitmap)MasksPictureBox.Image);
             Checked3x3();
+            
+        }
+        public MasksForm()
+        {
+            InitializeComponent();
+            this.grid = MakeGrid();
+            Checked3x3();
+            
 
-            /*
+        }
+
+        private TextBox[,] MakeGrid() 
+        {
             TextBox[,] grid = new TextBox[,]
             {
                 { Row1Col1Value, Row1Col2Value, Row1Col3Value, Row1Col4Value, Row1Col5Value, Row1Col6Value, Row1Col7Value},
@@ -41,17 +54,18 @@ namespace APO
                 { Row6Col1Value, Row6Col2Value, Row6Col3Value, Row6Col4Value, Row6Col5Value, Row6Col6Value, Row6Col7Value},
                 { Row7Col1Value, Row7Col2Value, Row7Col3Value, Row7Col4Value, Row7Col5Value, Row7Col6Value, Row7Col7Value}
             };
-            */
-
-        }
-        public MasksForm()
-        {
-            InitializeComponent();
-            Checked3x3();
+            return grid;
         }
 
         private void Execute_Click(object sender, EventArgs e)
         {
+            if (image == null)
+            {
+                MessageBox.Show("You didn't pick an image!");
+                return;
+            }
+            
+            
             float[,] k = Filter3x3();
 
             if (RadioButton5X5.Checked)
@@ -72,52 +86,48 @@ namespace APO
 
             Tools.Histogram(MasksChart, (Bitmap)MasksPictureBox.Image);
         }
+        private void BtnMedianFilter_Click(object sender, EventArgs e)
+        {
+            int size = 3;
+
+            if (RadioButton5X5.Checked)
+            {
+                size = 5;
+            }
+            if (RadioButton7X7.Checked)
+            {
+                size = 7;
+            }
+
+            CvInvoke.MedianBlur(image, image, size);
+            MasksPictureBox.Image = image.ToBitmap();
+            Tools.Histogram(MasksChart, (Bitmap)MasksPictureBox.Image);
+        }
         private float[,] Filter3x3()
         {
-            float[,] k = {  {Convert.ToInt32(Row1Col1Value.Text), Convert.ToInt32(Row1Col2Value.Text), Convert.ToInt32(Row1Col3Value.Text)},
-                            {Convert.ToInt32(Row2Col1Value.Text), Convert.ToInt32(Row2Col2Value.Text), Convert.ToInt32(Row2Col3Value.Text)},
-                            {Convert.ToInt32(Row3Col1Value.Text), Convert.ToInt32(Row3Col2Value.Text), Convert.ToInt32(Row3Col3Value.Text)}};
+            float[,] k = new float[3,3];
+            for (int i = 0; i < 3; ++i)
+                for (int j = 0; j < 3; ++j)
+                    k[i, j] = Convert.ToInt32(grid[i, j].Text);
+
             return k;
         }
 
 
         private float[,] Filter5x5()
         {
-            float[,] k = {  {Convert.ToInt32(Row1Col1Value.Text), Convert.ToInt32(Row1Col2Value.Text), Convert.ToInt32(Row1Col3Value.Text),
-                            Convert.ToInt32(Row1Col4Value.Text), Convert.ToInt32(Row1Col5Value.Text)},
-                            {Convert.ToInt32(Row2Col1Value.Text), Convert.ToInt32(Row2Col2Value.Text), Convert.ToInt32(Row2Col3Value.Text),
-                            Convert.ToInt32(Row2Col4Value.Text), Convert.ToInt32(Row2Col5Value.Text)},
-                            {Convert.ToInt32(Row3Col1Value.Text), Convert.ToInt32(Row3Col2Value.Text), Convert.ToInt32(Row3Col3Value.Text),
-                            Convert.ToInt32(Row3Col4Value.Text), Convert.ToInt32(Row3Col5Value.Text)},
-                            {Convert.ToInt32(Row4Col1Value.Text), Convert.ToInt32(Row4Col2Value.Text), Convert.ToInt32(Row4Col3Value.Text),
-                            Convert.ToInt32(Row4Col4Value.Text), Convert.ToInt32(Row4Col5Value.Text)},
-                            {Convert.ToInt32(Row5Col1Value.Text), Convert.ToInt32(Row5Col2Value.Text), Convert.ToInt32(Row5Col3Value.Text),
-                            Convert.ToInt32(Row5Col4Value.Text), Convert.ToInt32(Row5Col5Value.Text)}};
+            float[,] k = new float[5, 5];
+            for (int i = 0; i < 5; ++i)
+                for (int j = 0; j < 5; ++j)
+                    k[i, j] = Convert.ToInt32(grid[i, j].Text);
             return k;
         }
         private float[,] Filter7x7()
         {
-            float[,] k = {  {Convert.ToInt32(Row1Col1Value.Text), Convert.ToInt32(Row1Col2Value.Text), Convert.ToInt32(Row1Col3Value.Text),
-                            Convert.ToInt32(Row1Col4Value.Text), Convert.ToInt32(Row1Col5Value.Text), Convert.ToInt32(Row1Col6Value.Text),
-                            Convert.ToInt32(Row1Col7Value.Text)},
-                            {Convert.ToInt32(Row2Col1Value.Text), Convert.ToInt32(Row2Col2Value.Text), Convert.ToInt32(Row2Col3Value.Text),
-                            Convert.ToInt32(Row2Col4Value.Text), Convert.ToInt32(Row2Col5Value.Text), Convert.ToInt32(Row2Col6Value.Text),
-                            Convert.ToInt32(Row2Col7Value.Text)},
-                            {Convert.ToInt32(Row3Col1Value.Text), Convert.ToInt32(Row3Col2Value.Text), Convert.ToInt32(Row3Col3Value.Text),
-                            Convert.ToInt32(Row3Col4Value.Text), Convert.ToInt32(Row3Col5Value.Text), Convert.ToInt32(Row3Col6Value.Text),
-                            Convert.ToInt32(Row3Col7Value.Text)},
-                            {Convert.ToInt32(Row1Col1Value.Text), Convert.ToInt32(Row4Col2Value.Text), Convert.ToInt32(Row4Col3Value.Text),
-                            Convert.ToInt32(Row4Col4Value.Text), Convert.ToInt32(Row4Col5Value.Text), Convert.ToInt32(Row4Col6Value.Text),
-                            Convert.ToInt32(Row4Col7Value.Text)},
-                            {Convert.ToInt32(Row5Col1Value.Text), Convert.ToInt32(Row5Col2Value.Text), Convert.ToInt32(Row5Col3Value.Text),
-                            Convert.ToInt32(Row5Col4Value.Text), Convert.ToInt32(Row5Col5Value.Text), Convert.ToInt32(Row5Col6Value.Text),
-                            Convert.ToInt32(Row5Col7Value.Text)},
-                            {Convert.ToInt32(Row6Col1Value.Text), Convert.ToInt32(Row6Col2Value.Text), Convert.ToInt32(Row6Col3Value.Text),
-                            Convert.ToInt32(Row6Col4Value.Text), Convert.ToInt32(Row6Col5Value.Text), Convert.ToInt32(Row6Col6Value.Text),
-                            Convert.ToInt32(Row6Col7Value.Text)},
-                            {Convert.ToInt32(Row7Col1Value.Text), Convert.ToInt32(Row7Col2Value.Text), Convert.ToInt32(Row7Col3Value.Text),
-                            Convert.ToInt32(Row7Col4Value.Text), Convert.ToInt32(Row7Col5Value.Text), Convert.ToInt32(Row7Col6Value.Text),
-                            Convert.ToInt32(Row7Col7Value.Text)}};
+            float[,] k = new float[7, 7];
+            for (int i = 0; i < 7; ++i)
+                for (int j = 0; j < 7; ++j)
+                    k[i, j] = Convert.ToInt32(grid[i, j].Text);
             return k;
 
         }
@@ -153,146 +163,166 @@ namespace APO
             RadioButtonChange();
         }
 
-
-
         private void Checked3x3()
         {
-            Row1Col4Value.Enabled = false; Row1Col5Value.Enabled = false; Row1Col6Value.Enabled = false; Row1Col7Value.Enabled = false;
-            Row2Col4Value.Enabled = false; Row2Col5Value.Enabled = false; Row2Col6Value.Enabled = false; Row2Col7Value.Enabled = false;
-            Row3Col4Value.Enabled = false; Row3Col5Value.Enabled = false; Row3Col6Value.Enabled = false; Row3Col7Value.Enabled = false;
-            Row4Col1Value.Enabled = false; Row4Col2Value.Enabled = false; Row4Col3Value.Enabled = false;
-            Row4Col4Value.Enabled = false; Row4Col5Value.Enabled = false; Row4Col6Value.Enabled = false; Row4Col7Value.Enabled = false;
-            Row5Col1Value.Enabled = false; Row5Col2Value.Enabled = false; Row5Col3Value.Enabled = false;
-            Row5Col4Value.Enabled = false; Row5Col5Value.Enabled = false; Row5Col6Value.Enabled = false; Row5Col7Value.Enabled = false;
-            Row6Col1Value.Enabled = false; Row6Col2Value.Enabled = false; Row6Col3Value.Enabled = false;
-            Row6Col4Value.Enabled = false; Row6Col5Value.Enabled = false; Row6Col6Value.Enabled = false; Row6Col7Value.Enabled = false;
-            Row7Col1Value.Enabled = false; Row7Col2Value.Enabled = false; Row7Col3Value.Enabled = false;
-            Row7Col4Value.Enabled = false; Row7Col5Value.Enabled = false; Row7Col6Value.Enabled = false; Row7Col7Value.Enabled = false;
+            for (int i = 0; i < 7; ++i)
+                for (int j = 0; j < 7; ++j)
+                    grid[i, j].Enabled = false;
+
+            for (int i = 0; i < 3; ++i)
+                for (int j = 0; j < 3; ++j)
+                    grid[i, j].Enabled = true;
+
         }
         private void Checked5x5()
         {
-            Row1Col4Value.Enabled = true; Row1Col5Value.Enabled = true;
-            Row2Col4Value.Enabled = true; Row2Col5Value.Enabled = true;
-            Row3Col4Value.Enabled = true; Row3Col5Value.Enabled = true;
-            Row4Col1Value.Enabled = true; Row4Col2Value.Enabled = true; Row4Col3Value.Enabled = true;
-            Row4Col4Value.Enabled = true; Row4Col5Value.Enabled = true;
-            Row5Col1Value.Enabled = true; Row5Col2Value.Enabled = true; Row5Col3Value.Enabled = true;
-            Row5Col4Value.Enabled = true; Row5Col5Value.Enabled = true;
-
-            Row1Col6Value.Enabled = false; Row1Col7Value.Enabled = false;
-            Row2Col6Value.Enabled = false; Row2Col7Value.Enabled = false;
-            Row3Col6Value.Enabled = false; Row3Col7Value.Enabled = false;
-            Row4Col6Value.Enabled = false; Row4Col7Value.Enabled = false;
-            Row5Col6Value.Enabled = false; Row5Col7Value.Enabled = false;
-            Row6Col6Value.Enabled = false; Row6Col7Value.Enabled = false;
-            Row7Col6Value.Enabled = false; Row7Col7Value.Enabled = false;
-            Row6Col1Value.Enabled = false; Row6Col2Value.Enabled = false; Row6Col3Value.Enabled = false;
-            Row6Col4Value.Enabled = false; Row6Col5Value.Enabled = false;
-            Row7Col1Value.Enabled = false; Row7Col2Value.Enabled = false; Row7Col3Value.Enabled = false;
-            Row7Col4Value.Enabled = false; Row7Col5Value.Enabled = false;
+            for (int i = 0; i < 7; ++i)
+                for (int j = 0; j < 7; ++j)
+                    grid[i, j].Enabled = false;
+            for (int i = 0; i < 5; ++i)
+                for (int j = 0; j < 5; ++j)
+                    grid[i, j].Enabled = true;
         }
         private void Checked7x7()
         {
-            Checked5x5();
-            Row1Col6Value.Enabled = true; Row1Col7Value.Enabled = true;
-            Row2Col6Value.Enabled = true; Row2Col7Value.Enabled = true;
-            Row3Col6Value.Enabled = true; Row3Col7Value.Enabled = true;
-            Row4Col6Value.Enabled = true; Row4Col7Value.Enabled = true;
-            Row5Col6Value.Enabled = true; Row5Col7Value.Enabled = true;
-            Row6Col6Value.Enabled = true; Row6Col7Value.Enabled = true;
-            Row7Col6Value.Enabled = true; Row7Col7Value.Enabled = true;
-            Row6Col1Value.Enabled = true; Row6Col2Value.Enabled = true; Row6Col3Value.Enabled = true;
-            Row6Col4Value.Enabled = true; Row6Col5Value.Enabled = true;
-            Row7Col1Value.Enabled = true; Row7Col2Value.Enabled = true; Row7Col3Value.Enabled = true;
-            Row7Col4Value.Enabled = true; Row7Col5Value.Enabled = true;
+            for (int i = 0; i < 7; ++i)
+                for (int j = 0; j < 7; ++j)
+                    grid[i, j].Enabled = true;
         }
 
         private void Laplasian_1_RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             RadioButton3X3.Checked = true;
-            Row1Col1Value.Text = Convert.ToString(0); Row1Col2Value.Text = Convert.ToString(-1); Row1Col3Value.Text = Convert.ToString(0);
-            Row2Col1Value.Text = Convert.ToString(-1); Row2Col2Value.Text = Convert.ToString(4); Row2Col3Value.Text = Convert.ToString(-1);
-            Row3Col1Value.Text = Convert.ToString(0); Row3Col2Value.Text = Convert.ToString(-1); Row3Col3Value.Text = Convert.ToString(0);
+            string[,] mask = {
+                                { "0", "-1", "0"},
+                                { "-1", "4", "-1"},
+                                { "0", "-1", "0"}
+            };
+
+            Tools.toGrid(this.grid, mask);
         }
 
         private void Laplasian_2_RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             RadioButton3X3.Checked = true;
-            Row1Col1Value.Text = Convert.ToString(-1); Row1Col2Value.Text = Convert.ToString(-1); Row1Col3Value.Text = Convert.ToString(-1);
-            Row2Col1Value.Text = Convert.ToString(-1); Row2Col2Value.Text = Convert.ToString(8); Row2Col3Value.Text = Convert.ToString(-1);
-            Row3Col1Value.Text = Convert.ToString(-1); Row3Col2Value.Text = Convert.ToString(-1); Row3Col3Value.Text = Convert.ToString(-1);
+            string[,] mask = {
+                                { "-1", "-1", "-1"},
+                                { "-1", "8", "-1"},
+                                { "-1", "-1", "-1"}
+            };
+
+            Tools.toGrid(this.grid, mask);
+            
         }
 
         private void Laplasian_3_RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             RadioButton3X3.Checked = true;
-            Row1Col1Value.Text = Convert.ToString(1); Row1Col2Value.Text = Convert.ToString(-2); Row1Col3Value.Text = Convert.ToString(1);
-            Row2Col1Value.Text = Convert.ToString(-2); Row2Col2Value.Text = Convert.ToString(4); Row2Col3Value.Text = Convert.ToString(-2);
-            Row3Col1Value.Text = Convert.ToString(1); Row3Col2Value.Text = Convert.ToString(-2); Row3Col3Value.Text = Convert.ToString(1);
+            string[,] mask = {
+                                { "1", "-2", "1"},
+                                { "-2", "4", "-2"},
+                                { "1", "-2", "1"}
+            };
+
+            Tools.toGrid(this.grid, mask);
         }
 
         private void PrewittUpLeft_Click(object sender, EventArgs e)
         {
             RadioButton3X3.Checked = true;
-            Row1Col1Value.Text = Convert.ToString(1); Row1Col2Value.Text = Convert.ToString(1); Row1Col3Value.Text = Convert.ToString(0);
-            Row2Col1Value.Text = Convert.ToString(1); Row2Col2Value.Text = Convert.ToString(0); Row2Col3Value.Text = Convert.ToString(-1);
-            Row3Col1Value.Text = Convert.ToString(0); Row3Col2Value.Text = Convert.ToString(-1); Row3Col3Value.Text = Convert.ToString(-1);
+            string[,] mask = {
+                                { "1", "1", "0"},
+                                { "1", "0", "-1"},
+                                { "0", "-1", "-1"}
+            };
+
+            Tools.toGrid(this.grid, mask);
         }
 
         private void PrewittUp_Click(object sender, EventArgs e)
         {
             RadioButton3X3.Checked = true;
-            Row1Col1Value.Text = Convert.ToString(1); Row1Col2Value.Text = Convert.ToString(1); Row1Col3Value.Text = Convert.ToString(1);
-            Row2Col1Value.Text = Convert.ToString(0); Row2Col2Value.Text = Convert.ToString(0); Row2Col3Value.Text = Convert.ToString(0);
-            Row3Col1Value.Text = Convert.ToString(-1); Row3Col2Value.Text = Convert.ToString(-1); Row3Col3Value.Text = Convert.ToString(-1);
+            string[,] mask = {
+                                { "1", "1", "1"},
+                                { "0", "0", "0"},
+                                { "-1", "-1", "-1"}
+            };
+
+            Tools.toGrid(this.grid, mask);
+            
         }
 
         private void PrewittUpRight_Click(object sender, EventArgs e)
         {
             RadioButton3X3.Checked = true;
-            Row1Col1Value.Text = Convert.ToString(0); Row1Col2Value.Text = Convert.ToString(1); Row1Col3Value.Text = Convert.ToString(1);
-            Row2Col1Value.Text = Convert.ToString(-1); Row2Col2Value.Text = Convert.ToString(0); Row2Col3Value.Text = Convert.ToString(1);
-            Row3Col1Value.Text = Convert.ToString(-1); Row3Col2Value.Text = Convert.ToString(-1); Row3Col3Value.Text = Convert.ToString(0);
+            string[,] mask = {
+                                { "0", "1", "1"},
+                                { "-1", "0", "1"},
+                                { "-1", "-1", "0"}
+            };
+
+            Tools.toGrid(this.grid, mask);
         }
 
         private void PrewittLeft_Click(object sender, EventArgs e)
         {
             RadioButton3X3.Checked = true;
-            Row1Col1Value.Text = Convert.ToString(1); Row1Col2Value.Text = Convert.ToString(0); Row1Col3Value.Text = Convert.ToString(-1);
-            Row2Col1Value.Text = Convert.ToString(1); Row2Col2Value.Text = Convert.ToString(0); Row2Col3Value.Text = Convert.ToString(-1);
-            Row3Col1Value.Text = Convert.ToString(1); Row3Col2Value.Text = Convert.ToString(0); Row3Col3Value.Text = Convert.ToString(-1);
+            string[,] mask = {
+                                { "1", "0", "-1"},
+                                { "1", "0", "-1"},
+                                { "1", "0", "-1"}
+            };
+
+            Tools.toGrid(this.grid, mask);
         }
 
         private void PrewittRight_Click(object sender, EventArgs e)
         {
+
             RadioButton3X3.Checked = true;
-            Row1Col1Value.Text = Convert.ToString(-1); Row1Col2Value.Text = Convert.ToString(0); Row1Col3Value.Text = Convert.ToString(1);
-            Row2Col1Value.Text = Convert.ToString(-1); Row2Col2Value.Text = Convert.ToString(0); Row2Col3Value.Text = Convert.ToString(1);
-            Row3Col1Value.Text = Convert.ToString(-1); Row3Col2Value.Text = Convert.ToString(0); Row3Col3Value.Text = Convert.ToString(1);
+            string[,] mask = {
+                                { "-1", "0", "1"},
+                                { "-1", "0", "1"},
+                                { "-1", "0", "1"}
+            };
+
+            Tools.toGrid(this.grid, mask); 
         }
 
         private void PrewittDownLeft_Click(object sender, EventArgs e)
         {
             RadioButton3X3.Checked = true;
-            Row1Col1Value.Text = Convert.ToString(0); Row1Col2Value.Text = Convert.ToString(-1); Row1Col3Value.Text = Convert.ToString(-1);
-            Row2Col1Value.Text = Convert.ToString(1); Row2Col2Value.Text = Convert.ToString(0); Row2Col3Value.Text = Convert.ToString(-1);
-            Row3Col1Value.Text = Convert.ToString(1); Row3Col2Value.Text = Convert.ToString(1); Row3Col3Value.Text = Convert.ToString(0);
+            string[,] mask = {
+                                { "0", "-1", "-1"},
+                                { "1", "0", "-1"},
+                                { "1", "1", "0"}
+            };
+
+            Tools.toGrid(this.grid, mask);
         }
 
         private void PrewittDown_Click(object sender, EventArgs e)
         {
             RadioButton3X3.Checked = true;
-            Row1Col1Value.Text = Convert.ToString(-1); Row1Col2Value.Text = Convert.ToString(-1); Row1Col3Value.Text = Convert.ToString(-1);
-            Row2Col1Value.Text = Convert.ToString(0); Row2Col2Value.Text = Convert.ToString(0); Row2Col3Value.Text = Convert.ToString(0);
-            Row3Col1Value.Text = Convert.ToString(1); Row3Col2Value.Text = Convert.ToString(1); Row3Col3Value.Text = Convert.ToString(1);
+            string[,] mask = {
+                                { "-1", "-1", "-1"},
+                                { "0", "0", "0"},
+                                { "1", "1", "1"}
+            };
+
+            Tools.toGrid(this.grid, mask);
         }
 
         private void PrewittDownRight_Click(object sender, EventArgs e)
         {
             RadioButton3X3.Checked = true;
-            Row1Col1Value.Text = Convert.ToString(-1); Row1Col2Value.Text = Convert.ToString(-1); Row1Col3Value.Text = Convert.ToString(0);
-            Row2Col1Value.Text = Convert.ToString(-1); Row2Col2Value.Text = Convert.ToString(0); Row2Col3Value.Text = Convert.ToString(1);
-            Row3Col1Value.Text = Convert.ToString(0); Row3Col2Value.Text = Convert.ToString(1); Row3Col3Value.Text = Convert.ToString(1);
+            string[,] mask = {
+                                { "-1", "-1", "0"},
+                                { "-1", "0", "1"},
+                                { "0", "1", "1"}
+            };
+
+            Tools.toGrid(this.grid, mask);
         }
 
         private void IsolatedRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -357,5 +387,6 @@ namespace APO
         {
 
         }
+
     }
 }

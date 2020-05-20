@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GreyHistogramMenuStripItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -153,10 +153,10 @@
             // 
             this.PictureWindowChart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea2.Name = "ChartArea1";
-            this.PictureWindowChart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.PictureWindowChart.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.PictureWindowChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.PictureWindowChart.Legends.Add(legend1);
             this.PictureWindowChart.Location = new System.Drawing.Point(649, 27);
             this.PictureWindowChart.Name = "PictureWindowChart";
             this.PictureWindowChart.Size = new System.Drawing.Size(625, 300);
@@ -166,7 +166,6 @@
             // StretchButton
             // 
             this.StretchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.StretchButton.Enabled = false;
             this.StretchButton.Location = new System.Drawing.Point(650, 333);
             this.StretchButton.Name = "StretchButton";
             this.StretchButton.Size = new System.Drawing.Size(100, 35);
@@ -178,7 +177,6 @@
             // EqualButton
             // 
             this.EqualButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.EqualButton.Enabled = false;
             this.EqualButton.Location = new System.Drawing.Point(755, 333);
             this.EqualButton.Name = "EqualButton";
             this.EqualButton.Size = new System.Drawing.Size(100, 35);
@@ -328,7 +326,6 @@
             // SelectiveEqualizationButton
             // 
             this.SelectiveEqualizationButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.SelectiveEqualizationButton.Enabled = false;
             this.SelectiveEqualizationButton.Location = new System.Drawing.Point(861, 333);
             this.SelectiveEqualizationButton.Name = "SelectiveEqualizationButton";
             this.SelectiveEqualizationButton.Size = new System.Drawing.Size(100, 35);

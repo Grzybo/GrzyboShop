@@ -14,20 +14,19 @@ namespace APO
     public partial class StretchWindow : Form
     {
         private PictureWindow pictureWindow;
+        private Bitmap bitmap;
         private System.IO.MemoryStream myStream = new System.IO.MemoryStream();
 
-        public StretchWindow(PictureWindow pictureWindow)
+        public StretchWindow(Bitmap bitmap)
         {
-            InitializeComponent();
-            this.pictureWindow = pictureWindow;
-            StretchWindowPictureBox.Image = this.pictureWindow.bitmap;
+            InitializeComponent(); 
+
+            
+            this.bitmap = bitmap;
+            StretchWindowPictureBox.Image = bitmap;
             StretchWindowPictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
             StretchWindowPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            this.pictureWindow.chart.Serializer.Save(myStream);
-
-            StretchWindowChart.Serializer.Load(myStream);
-            StretchWindowChart.Show();
-
+            Tools.Histogram(StretchWindowChart, (Bitmap)StretchWindowPictureBox.Image);
         }
 
         private void TrackBarMin_ValueChanged(object sender, EventArgs e)
@@ -49,7 +48,7 @@ namespace APO
 
         private void CalculateStrechButton_Click(object sender, EventArgs e)
         {
-            if (this.pictureWindow.gray)
+            if (Tools.IsGray(this.bitmap))
             {
 
                 Bitmap bitmap = Stretching.StretchGray((Bitmap)StretchWindowPictureBox.Image, TrackBarMax.Value, TrackBarMin.Value);
@@ -57,24 +56,25 @@ namespace APO
 
                 Tools.HistogramGray(StretchWindowChart, (Bitmap)StretchWindowPictureBox.Image);
             }
-            if (this.pictureWindow.rgb)
+            if (Tools.IsGray(this.bitmap) == false)
             {
-                StretchWindowPictureBox.Image = Stretching.StretchRGB((Bitmap)StretchWindowPictureBox.Image, TrackBarMax.Value, TrackBarMin.Value);
-
+                Bitmap bitmap = Stretching.StretchRGB((Bitmap)StretchWindowPictureBox.Image, TrackBarMax.Value, TrackBarMin.Value);
+                StretchWindowPictureBox.Image = bitmap;
                 Tools.Histogram(StretchWindowChart, (Bitmap)StretchWindowPictureBox.Image);
-            }
+            } 
+            
         }
 
         private void RestoreDefaultImageButton_Click(object sender, EventArgs e)
         {
             StretchWindowPictureBox.Image = this.pictureWindow.bitmap; // nie działa dla rgb!!!!!! 
 
-            if (this.pictureWindow.gray)
+            if (Tools.IsGray(this.bitmap))
             {
                 Tools.HistogramGray(StretchWindowChart, (Bitmap)StretchWindowPictureBox.Image);
             }
 
-            if (this.pictureWindow.rgb)
+            if (Tools.IsGray(this.bitmap) == false)
             {
                 Tools.Histogram(StretchWindowChart, (Bitmap)StretchWindowPictureBox.Image);
             }

@@ -304,3 +304,4 @@ C:\Users\Dell\source\repos\GrzyboShop\APO\APO\obj\Debug\APO.csproj.CopyComplete
 C:\Users\Dell\source\repos\GrzyboShop\APO\APO\obj\Debug\APO.exe
 C:\Users\Dell\source\repos\GrzyboShop\APO\APO\obj\Debug\APO.pdb
 C:\Users\Dell\source\repos\GrzyboShop\APO\APO\obj\Debug\APO.MorphologicalOperationsForm.resources
+C:\Users\Dell\source\repos\GrzyboShop\APO\APO\obj\Debug\APO.SegmentationForm.resources

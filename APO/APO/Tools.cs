@@ -13,7 +13,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 namespace APO
 {
 
-    class Tools
+    abstract class Tools
     {
         public static Size FitSize(Size pictureSize)
         {
@@ -141,8 +141,50 @@ namespace APO
                 chart.Series["Gray"].Points.AddXY(i, GrayLut[i]);
             }
         }
-        
 
+        public static void toGrid(TextBox[,] grid, string[,] mask)
+        {
+            for(int i = 0; i < 3; ++i)
+                for (int j = 0; j < 3; ++j)
+                    grid[i, j].Text = mask[i, j].ToString();
+        }
+
+        public static bool IsGray(Bitmap bitmap) 
+        {
+            bool gray = true;
+
+            for (int x = 0; x < bitmap.Width; ++x)
+            {
+                for (int y = 0; y < bitmap.Height; ++y)
+                {
+                    if (bitmap.GetPixel(x, y).R != bitmap.GetPixel(x, y).G &&
+                         bitmap.GetPixel(x, y).G != bitmap.GetPixel(x, y).B)
+                    {
+                        gray = false;
+                        break;
+                    }
+                }
+            }
+            return gray;
+        }
+
+        public static bool IsBinary(Bitmap bitmap)
+        {
+            bool binary = true;
+
+            for (int x = 0; x < bitmap.Width; ++x)
+            {
+                for (int y = 0; y < bitmap.Height; ++y)
+                {
+                    if (bitmap.GetPixel(x, y).R != 0 && bitmap.GetPixel(x, y).R != 255)
+                    {
+                        binary = false;
+                        break;
+                    }
+                }
+            }
+            return binary;
+        }
 
 
 

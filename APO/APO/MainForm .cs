@@ -67,6 +67,12 @@ namespace APO
             MasksForm form = new MasksForm();
             form.Show();
         }
+
+        private void segmentationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SegmentationForm form = new SegmentationForm();
+            form.Show();
+        }
     }
 
 

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.StretchWindowPictureBox = new System.Windows.Forms.PictureBox();
             this.StretchWindowChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.TrackBarMin = new System.Windows.Forms.TrackBar();
@@ -69,8 +68,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             chartArea1.Name = "ChartArea1";
             this.StretchWindowChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.StretchWindowChart.Legends.Add(legend1);
             this.StretchWindowChart.Location = new System.Drawing.Point(500, 27);
             this.StretchWindowChart.Name = "StretchWindowChart";
             this.StretchWindowChart.Size = new System.Drawing.Size(509, 300);

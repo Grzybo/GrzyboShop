@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.RadioButton3X3 = new System.Windows.Forms.RadioButton();
             this.RadioButton5X5 = new System.Windows.Forms.RadioButton();
             this.RadioButton7X7 = new System.Windows.Forms.RadioButton();
@@ -111,6 +110,7 @@
             this.doneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MasksChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.ConvolutionButton = new System.Windows.Forms.Button();
+            this.BtnMedianFilter = new System.Windows.Forms.Button();
             this.NxMGroupBox.SuspendLayout();
             this.SharpeningGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MasksPictureBox)).BeginInit();
@@ -671,7 +671,7 @@
             // 
             this.Execute.Location = new System.Drawing.Point(12, 476);
             this.Execute.Name = "Execute";
-            this.Execute.Size = new System.Drawing.Size(204, 29);
+            this.Execute.Size = new System.Drawing.Size(90, 29);
             this.Execute.TabIndex = 57;
             this.Execute.Text = "Execute";
             this.Execute.UseVisualStyleBackColor = true;
@@ -886,8 +886,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             chartArea1.Name = "ChartArea1";
             this.MasksChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.MasksChart.Legends.Add(legend1);
             this.MasksChart.Location = new System.Drawing.Point(990, 38);
             this.MasksChart.Name = "MasksChart";
             this.MasksChart.Size = new System.Drawing.Size(376, 462);
@@ -904,11 +902,22 @@
             this.ConvolutionButton.UseVisualStyleBackColor = true;
             this.ConvolutionButton.Visible = false;
             // 
+            // BtnMedianFilter
+            // 
+            this.BtnMedianFilter.Location = new System.Drawing.Point(117, 476);
+            this.BtnMedianFilter.Name = "BtnMedianFilter";
+            this.BtnMedianFilter.Size = new System.Drawing.Size(99, 29);
+            this.BtnMedianFilter.TabIndex = 71;
+            this.BtnMedianFilter.Text = "Median Filter";
+            this.BtnMedianFilter.UseVisualStyleBackColor = true;
+            this.BtnMedianFilter.Click += new System.EventHandler(this.BtnMedianFilter_Click);
+            // 
             // MasksForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1378, 512);
+            this.Controls.Add(this.BtnMedianFilter);
             this.Controls.Add(this.ConvolutionButton);
             this.Controls.Add(this.MasksChart);
             this.Controls.Add(this.groupBox2);
@@ -990,7 +999,6 @@
         private System.Windows.Forms.RadioButton RadioButton3X3;
         private System.Windows.Forms.RadioButton RadioButton5X5;
         private System.Windows.Forms.RadioButton RadioButton7X7;
-        private System.Windows.Forms.TextBox Row1Col1Value;
         private System.Windows.Forms.TextBox Row1Col2Value;
         private System.Windows.Forms.TextBox Row1Col3Value;
         private System.Windows.Forms.TextBox Row1Col4Value;
@@ -1068,5 +1076,7 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.Button ConvolutionButton;
+        public System.Windows.Forms.TextBox Row1Col1Value;
+        private System.Windows.Forms.Button BtnMedianFilter;
     }
 }

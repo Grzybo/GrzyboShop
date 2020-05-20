@@ -18,22 +18,22 @@ namespace APO
     public partial class PictureWindow : Form
     {
         public Bitmap bitmap { get; set; }
-        public Chart chart { get; set; }
-        public bool gray { get; set; }
-        public bool rgb { get; set; }
+        public Bitmap firstBitmap; 
+
 
         public PictureWindow(Bitmap bitmap)
         {
             InitializeComponent();
             PictureBox.Image = bitmap;
+            this.bitmap = bitmap;
+            firstBitmap = bitmap;
             PictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
             PictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             PictureWindowChart.ChartAreas[0].AxisX.Maximum = 255;
             PictureWindowChart.ChartAreas[0].AxisX.Minimum = 0;
             
             this.bitmap = bitmap;
-            gray = false;
-            rgb = false;
+
         }
 
         private void Enableing()
@@ -44,7 +44,7 @@ namespace APO
             StretchButton.Enabled = true;
             EqualButton.Enabled = true;
             SelectiveEqualizationButton.Enabled = true; 
-            this.chart = PictureWindowChart;
+
         }
 
 // ######################################## Histogram ###########################################################################
@@ -53,7 +53,6 @@ namespace APO
 
             Tools.HistogramGray(PictureWindowChart, (Bitmap)PictureBox.Image);
             //PixelsTextBox.Text = sum.ToString();
-            gray = true;
         }
 
         private void AllinOneMenuStripItem_Click(object sender, EventArgs e)
@@ -93,7 +92,7 @@ namespace APO
 // ######################################## Stretch ###########################################################################
         private void StretchButton_Click(object sender, EventArgs e)
         {
-            StretchWindow stretchWindow = new StretchWindow(this);
+            StretchWindow stretchWindow = new StretchWindow((Bitmap)PictureBox.Image);
             stretchWindow.Text = this.Text;
             stretchWindow.Show();
             this.Close();
@@ -101,12 +100,12 @@ namespace APO
 // ######################################## Equalization ###########################################################################
         private void EqualButton_Click(object sender, EventArgs e)
         {
-            if (gray)
+            if (Tools.IsGray(this.bitmap))
             {
                 PictureBox.Image = Equalization.EqualGray((Bitmap)PictureBox.Image);
                 Tools.HistogramGray(PictureWindowChart, (Bitmap)PictureBox.Image);
             }
-            if (rgb)
+            if (Tools.IsGray(this.bitmap) == false)
             {
                 PictureBox.Image = Equalization.EqualRGB((Bitmap)PictureBox.Image);
                 Tools.Histogram(PictureWindowChart, (Bitmap)PictureBox.Image);
@@ -115,12 +114,12 @@ namespace APO
         }
         private void SelectiveEqualizationButton_Click(object sender, EventArgs e)
         {
-            if (gray)
+            if (Tools.IsGray(this.bitmap))
             {
                 PictureBox.Image = Equalization.SelectiveEqualGray((Bitmap)PictureBox.Image);
                 Tools.HistogramGray(PictureWindowChart, (Bitmap)PictureBox.Image);
             }
-            if (rgb)
+            if (Tools.IsGray(this.bitmap) == false)
             {
                 PictureBox.Image = Equalization.SelectiveEqualRGB((Bitmap)PictureBox.Image);
                 Tools.Histogram(PictureWindowChart, (Bitmap)PictureBox.Image);
@@ -151,22 +150,19 @@ namespace APO
         private void ReductionButton_Click(object sender, EventArgs e)
         {
             PictureBox.Image = Operations.Reduction((Bitmap)PictureBox.Image, (int)GrayLevelsUpDown.Value);
-            if (gray){Tools.HistogramGray(PictureWindowChart, (Bitmap)PictureBox.Image);}
-            if (rgb){Tools.Histogram(PictureWindowChart, (Bitmap)PictureBox.Image);}
+            if (Tools.IsGray(this.bitmap)) {Tools.HistogramGray(PictureWindowChart, (Bitmap)PictureBox.Image);}
+            if (Tools.IsGray(this.bitmap) == false) {Tools.Histogram(PictureWindowChart, (Bitmap)PictureBox.Image);}
         }
 
         
 
         private void RefreshButton_Click(object sender, EventArgs e)
         {
-            PictureBox.Image = bitmap;
+            PictureBox.Image = this.bitmap;
             PictureWindowChart.Series.Clear();
             histogramToolStripMenuItem1.Enabled = false;
             GreyHistogramMenuStripItem.Enabled = true;
             RGBHistogramMenuStrip.Enabled = true;
-            StretchButton.Enabled = false;
-            EqualButton.Enabled = false;
-            SelectiveEqualizationButton.Enabled = false;
         }
 
         
