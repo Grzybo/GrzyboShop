@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.PbSegmentation = new System.Windows.Forms.PictureBox();
             this.ChartSegmentation = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.BtnThreshold = new System.Windows.Forms.Button();
@@ -40,6 +40,9 @@
             this.BtnAdaptiveThreshold = new System.Windows.Forms.Button();
             this.BtnOtsu = new System.Windows.Forms.Button();
             this.BtnWatershed = new System.Windows.Forms.Button();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PbSegmentation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChartSegmentation)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -62,13 +65,13 @@
             // 
             this.ChartSegmentation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea2.Name = "ChartArea1";
-            this.ChartSegmentation.ChartAreas.Add(chartArea2);
+            chartArea3.Name = "ChartArea1";
+            this.ChartSegmentation.ChartAreas.Add(chartArea3);
             this.ChartSegmentation.Location = new System.Drawing.Point(741, 27);
             this.ChartSegmentation.Name = "ChartSegmentation";
-            series2.ChartArea = "ChartArea1";
-            series2.Name = "Series1";
-            this.ChartSegmentation.Series.Add(series2);
+            series3.ChartArea = "ChartArea1";
+            series3.Name = "Series1";
+            this.ChartSegmentation.Series.Add(series3);
             this.ChartSegmentation.Size = new System.Drawing.Size(493, 320);
             this.ChartSegmentation.TabIndex = 1;
             this.ChartSegmentation.Text = "chart1";
@@ -86,7 +89,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.saveToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1237, 24);
@@ -158,7 +162,31 @@
             this.BtnWatershed.TabIndex = 7;
             this.BtnWatershed.Text = "Watershed";
             this.BtnWatershed.UseVisualStyleBackColor = true;
+            this.BtnWatershed.Visible = false;
             this.BtnWatershed.Click += new System.EventHandler(this.BtnWatershed_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.imageToolStripMenuItem,
+            this.histogramToolStripMenuItem});
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.saveToolStripMenuItem.Text = "Save";
+            // 
+            // imageToolStripMenuItem
+            // 
+            this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
+            this.imageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.imageToolStripMenuItem.Text = "Image";
+            this.imageToolStripMenuItem.Click += new System.EventHandler(this.imageToolStripMenuItem_Click);
+            // 
+            // histogramToolStripMenuItem
+            // 
+            this.histogramToolStripMenuItem.Name = "histogramToolStripMenuItem";
+            this.histogramToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.histogramToolStripMenuItem.Text = "Histogram";
+            this.histogramToolStripMenuItem.Click += new System.EventHandler(this.histogramToolStripMenuItem_Click);
             // 
             // SegmentationForm
             // 
@@ -198,5 +226,8 @@
         private System.Windows.Forms.Button BtnAdaptiveThreshold;
         private System.Windows.Forms.Button BtnOtsu;
         private System.Windows.Forms.Button BtnWatershed;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem imageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem histogramToolStripMenuItem;
     }
 }
