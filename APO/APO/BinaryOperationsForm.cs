@@ -18,10 +18,12 @@ namespace APO
     {
         private Image<Bgra, byte> imageA;
         private Image<Bgra, byte> imageB;
+        public Panel panel;
 
-        public BinaryOperationsForm()
+        public BinaryOperationsForm(Panel panel)
         {
             InitializeComponent();
+            this.panel = panel;
         }
 
         private void imageAToolStripMenuItem_Click(object sender, EventArgs e)

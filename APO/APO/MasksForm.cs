@@ -19,10 +19,11 @@ namespace APO
     {
         public Image<Bgra, byte> image;
         private Emgu.CV.CvEnum.BorderType borderType = Emgu.CV.CvEnum.BorderType.Isolated;
+        public Panel panel;
 
         TextBox[,] grid;
 
-        public MasksForm(Image<Bgra, byte> image)
+        public MasksForm(Image<Bgra, byte> image, Panel panel)
         {
             InitializeComponent();
             this.grid = MakeGrid();
@@ -31,13 +32,15 @@ namespace APO
             this.image = image;
             Tools.Histogram(MasksChart, (Bitmap)MasksPictureBox.Image);
             Checked3x3();
-            
+            this.panel = panel;
+
         }
-        public MasksForm()
+        public MasksForm(Panel panel)
         {
             InitializeComponent();
             this.grid = MakeGrid();
             Checked3x3();
+            this.panel = panel;
             
 
         }
@@ -355,7 +358,8 @@ namespace APO
         {
             Bitmap bitmap = new Bitmap(MasksPictureBox.Image);
             Image<Bgra, byte> img = bitmap.ToImage<Bgra, byte>();
-            NeighborhoodOperationsForm operationsForm = new NeighborhoodOperationsForm(img);
+            NeighborhoodOperationsForm operationsForm = new NeighborhoodOperationsForm(img, panel) { TopLevel = false};
+            panel.Controls.Add(panel);
             operationsForm.Show();
             this.Close();
         }

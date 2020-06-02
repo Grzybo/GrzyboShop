@@ -30,87 +30,70 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemOpen = new System.Windows.Forms.ToolStripMenuItem();
-            this.binaryOperationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.morfologicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.neighborhoodOperationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.masksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.segmentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lab2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lab3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lab4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lab5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pContainer = new System.Windows.Forms.Panel();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuStrip
             // 
             this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.binaryOperationsToolStripMenuItem,
-            this.morfologicalToolStripMenuItem,
-            this.neighborhoodOperationsToolStripMenuItem,
-            this.masksToolStripMenuItem,
-            this.segmentationToolStripMenuItem});
+            this.lab2ToolStripMenuItem,
+            this.lab3ToolStripMenuItem,
+            this.lab4ToolStripMenuItem,
+            this.lab5ToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
-            this.MenuStrip.Size = new System.Drawing.Size(1446, 24);
+            this.MenuStrip.Size = new System.Drawing.Size(1005, 24);
             this.MenuStrip.TabIndex = 0;
             this.MenuStrip.Text = "menuStrip1";
             // 
-            // fileToolStripMenuItem
+            // lab2ToolStripMenuItem
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuItemOpen});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
+            this.lab2ToolStripMenuItem.Name = "lab2ToolStripMenuItem";
+            this.lab2ToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.lab2ToolStripMenuItem.Text = "Lab 2 ";
+            this.lab2ToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
-            // MenuItemOpen
+            // lab3ToolStripMenuItem
             // 
-            this.MenuItemOpen.Name = "MenuItemOpen";
-            this.MenuItemOpen.Size = new System.Drawing.Size(103, 22);
-            this.MenuItemOpen.Text = "Open";
-            this.MenuItemOpen.Click += new System.EventHandler(this.MenuItemOpen_Click);
+            this.lab3ToolStripMenuItem.Name = "lab3ToolStripMenuItem";
+            this.lab3ToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.lab3ToolStripMenuItem.Text = "Lab 3";
+            this.lab3ToolStripMenuItem.Click += new System.EventHandler(this.neighborhoodOperationsToolStripMenuItem_Click);
             // 
-            // binaryOperationsToolStripMenuItem
+            // lab4ToolStripMenuItem
             // 
-            this.binaryOperationsToolStripMenuItem.Name = "binaryOperationsToolStripMenuItem";
-            this.binaryOperationsToolStripMenuItem.Size = new System.Drawing.Size(114, 20);
-            this.binaryOperationsToolStripMenuItem.Text = "Binary  operations";
-            this.binaryOperationsToolStripMenuItem.Click += new System.EventHandler(this.binaryOperationsToolStripMenuItem_Click);
+            this.lab4ToolStripMenuItem.Name = "lab4ToolStripMenuItem";
+            this.lab4ToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.lab4ToolStripMenuItem.Text = "Lab 4";
+            this.lab4ToolStripMenuItem.Click += new System.EventHandler(this.morfologicalToolStripMenuItem_Click);
             // 
-            // morfologicalToolStripMenuItem
+            // lab5ToolStripMenuItem
             // 
-            this.morfologicalToolStripMenuItem.Name = "morfologicalToolStripMenuItem";
-            this.morfologicalToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
-            this.morfologicalToolStripMenuItem.Text = "Morfological ";
-            this.morfologicalToolStripMenuItem.Click += new System.EventHandler(this.morfologicalToolStripMenuItem_Click);
+            this.lab5ToolStripMenuItem.Name = "lab5ToolStripMenuItem";
+            this.lab5ToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.lab5ToolStripMenuItem.Text = "Lab 5";
+            this.lab5ToolStripMenuItem.Click += new System.EventHandler(this.segmentationToolStripMenuItem_Click);
             // 
-            // neighborhoodOperationsToolStripMenuItem
+            // pContainer
             // 
-            this.neighborhoodOperationsToolStripMenuItem.Name = "neighborhoodOperationsToolStripMenuItem";
-            this.neighborhoodOperationsToolStripMenuItem.Size = new System.Drawing.Size(158, 20);
-            this.neighborhoodOperationsToolStripMenuItem.Text = "Neighborhood Operations";
-            this.neighborhoodOperationsToolStripMenuItem.Click += new System.EventHandler(this.neighborhoodOperationsToolStripMenuItem_Click);
-            // 
-            // masksToolStripMenuItem
-            // 
-            this.masksToolStripMenuItem.Name = "masksToolStripMenuItem";
-            this.masksToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.masksToolStripMenuItem.Text = "Masks";
-            this.masksToolStripMenuItem.Click += new System.EventHandler(this.masksToolStripMenuItem_Click);
-            // 
-            // segmentationToolStripMenuItem
-            // 
-            this.segmentationToolStripMenuItem.Name = "segmentationToolStripMenuItem";
-            this.segmentationToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
-            this.segmentationToolStripMenuItem.Text = "Segmentation";
-            this.segmentationToolStripMenuItem.Click += new System.EventHandler(this.segmentationToolStripMenuItem_Click);
+            this.pContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pContainer.Location = new System.Drawing.Point(0, 24);
+            this.pContainer.Name = "pContainer";
+            this.pContainer.Size = new System.Drawing.Size(1005, 440);
+            this.pContainer.TabIndex = 1;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.ClientSize = new System.Drawing.Size(1446, 584);
+            this.ClientSize = new System.Drawing.Size(1005, 464);
+            this.Controls.Add(this.pContainer);
             this.Controls.Add(this.MenuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.MenuStrip;
@@ -127,13 +110,11 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip MenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem MenuItemOpen;
-        private System.Windows.Forms.ToolStripMenuItem binaryOperationsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem morfologicalToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem neighborhoodOperationsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem masksToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem segmentationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lab2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lab4ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lab3ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lab5ToolStripMenuItem;
+        public System.Windows.Forms.Panel pContainer;
     }
 }
 

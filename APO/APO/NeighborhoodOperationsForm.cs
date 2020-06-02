@@ -19,19 +19,22 @@ namespace APO
         public Image<Bgra, byte> image;
         private Image<Bgra, byte> inputImage;
         public bool fromPictureWindow;
+        public Panel panel;
 
-        public NeighborhoodOperationsForm(Image<Bgra, byte> image)
+        public NeighborhoodOperationsForm(Image<Bgra, byte> image, Panel panel)
         {
             InitializeComponent();
             this.image = image;
             this.inputImage = image;
             PictureBox.Image = image.ToBitmap();
             Tools.Histogram(NeighborhoodChart, (Bitmap)PictureBox.Image);
+            this.panel = panel;
 
         }
-        public NeighborhoodOperationsForm()
+        public NeighborhoodOperationsForm(Panel panel)
         {
             InitializeComponent();
+            this.panel = panel;
         }
 
 
@@ -124,7 +127,8 @@ namespace APO
         {
             if (image != null)
             {
-                MasksForm masksForm = new MasksForm(new Bitmap(PictureBox.Image).ToImage<Bgra, byte>());
+                MasksForm masksForm = new MasksForm(new Bitmap(PictureBox.Image).ToImage<Bgra, byte>(), panel) { TopLevel = false};
+                panel.Controls.Add(masksForm);
                 masksForm.Show();
                 this.Close();
             }
@@ -133,7 +137,8 @@ namespace APO
 
         private void doneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PictureWindow pictureWindow = new PictureWindow((Bitmap)PictureBox.Image);
+            PictureWindow pictureWindow = new PictureWindow((Bitmap)PictureBox.Image, this.panel) { TopLevel = false};
+            panel.Controls.Add(panel);
             pictureWindow.Show();
             this.Close();
         }
@@ -148,6 +153,13 @@ namespace APO
 
             try { this.NeighborhoodChart.SaveImage(x.FileName, ChartImageFormat.Jpeg); }
             catch { }
+        }
+
+        private void binaryOperationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BinaryOperationsForm form = new BinaryOperationsForm(panel) { TopLevel = false};
+            panel.Controls.Add(form);
+            form.Show();
         }
     }
 }

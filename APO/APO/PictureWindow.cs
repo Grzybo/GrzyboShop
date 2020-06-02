@@ -18,10 +18,11 @@ namespace APO
     public partial class PictureWindow : Form
     {
         public Bitmap bitmap { get; set; }
-        public Bitmap firstBitmap; 
+        public Bitmap firstBitmap;
+        public Panel panel;
 
 
-        public PictureWindow(Bitmap bitmap)
+        public PictureWindow(Bitmap bitmap, Panel panel)
         {
             InitializeComponent();
             PictureBox.Image = bitmap;
@@ -31,10 +32,21 @@ namespace APO
             PictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             PictureWindowChart.ChartAreas[0].AxisX.Maximum = 255;
             PictureWindowChart.ChartAreas[0].AxisX.Minimum = 0;
-            
+            this.panel = panel;
             this.bitmap = bitmap;
 
         }
+        public PictureWindow(Panel panel) 
+        {
+            InitializeComponent();
+            this.panel = panel;
+            PictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
+            PictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            PictureWindowChart.ChartAreas[0].AxisX.Maximum = 255;
+            PictureWindowChart.ChartAreas[0].AxisX.Minimum = 0;
+        }
+
+
 
         private void Enableing()
         {
@@ -63,9 +75,11 @@ namespace APO
 // ######################################## Duplicate ###########################################################################
         private void DuplicateMenuStripItem_Click(object sender, EventArgs e)
         {
-            PictureWindow pictureWindow = new PictureWindow((Bitmap)PictureBox.Image);
+            PictureWindow pictureWindow = new PictureWindow((Bitmap)PictureBox.Image, panel) { TopLevel = false};
             pictureWindow.Size = this.Size;
-            pictureWindow.Show();
+            panel.Controls.Add(pictureWindow);
+            pictureWindow.Show(); 
+
         }
 
 // ######################################## Save ###########################################################################
@@ -92,10 +106,14 @@ namespace APO
 // ######################################## Stretch ###########################################################################
         private void StretchButton_Click(object sender, EventArgs e)
         {
-            StretchWindow stretchWindow = new StretchWindow((Bitmap)PictureBox.Image);
-            stretchWindow.Text = this.Text;
-            stretchWindow.Show();
-            this.Close();
+            if(bitmap != null)
+            {
+                StretchWindow stretchWindow = new StretchWindow((Bitmap)PictureBox.Image, this.panel) { TopLevel = false};
+                stretchWindow.Text = this.Text;
+                panel.Controls.Add(stretchWindow);
+                stretchWindow.Show();
+                this.Close();
+            }
         }
 // ######################################## Equalization ###########################################################################
         private void EqualButton_Click(object sender, EventArgs e)
@@ -158,7 +176,7 @@ namespace APO
 
         private void RefreshButton_Click(object sender, EventArgs e)
         {
-            PictureBox.Image = this.bitmap;
+            PictureBox.Image = this.firstBitmap;
             PictureWindowChart.Series.Clear();
             histogramToolStripMenuItem1.Enabled = false;
             GreyHistogramMenuStripItem.Enabled = true;
@@ -168,13 +186,27 @@ namespace APO
         
         private void neighborhoodOperationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Image<Bgra, byte> image = bitmap.ToImage<Bgra, byte>();
-            NeighborhoodOperationsForm operationsForm = new NeighborhoodOperationsForm(image);
-            operationsForm.Show();
-            this.Close();
+            if (bitmap != null)
+            {
+                Image<Bgra, byte> image = bitmap.ToImage<Bgra, byte>();
+                NeighborhoodOperationsForm operationsForm = new NeighborhoodOperationsForm(image, panel) { TopLevel = false};
+                panel.Controls.Add(operationsForm);
+                operationsForm.Show();
+                this.Close();
+            }
         }
 
-        
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                bitmap = new Bitmap(dialog.FileName);
+                firstBitmap = bitmap;
+                PictureBox.Image = bitmap;
+            }
+        }
     }
 }
 

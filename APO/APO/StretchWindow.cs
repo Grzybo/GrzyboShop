@@ -17,10 +17,11 @@ namespace APO
         private Bitmap bitmap;
         private System.IO.MemoryStream myStream = new System.IO.MemoryStream();
         private Stack<Bitmap> stack;
-        public StretchWindow(Bitmap bitmap)
+        public Panel panel;
+        public StretchWindow(Bitmap bitmap, Panel panel)
         {
-            InitializeComponent(); 
-
+            InitializeComponent();
+            this.panel = panel;
             this.bitmap = bitmap;
             StretchWindowPictureBox.Image = bitmap;
             StretchWindowPictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -92,7 +93,8 @@ namespace APO
 
         private void DoneButton_Click(object sender, EventArgs e)
         {
-            PictureWindow window = new PictureWindow((Bitmap)StretchWindowPictureBox.Image);
+            PictureWindow window = new PictureWindow((Bitmap)StretchWindowPictureBox.Image, panel) { TopLevel = false};
+            panel.Controls.Add(window);
             window.Show();
             this.Close();
         }

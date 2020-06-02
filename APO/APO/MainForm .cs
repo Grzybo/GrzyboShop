@@ -17,61 +17,46 @@ namespace APO
 {
     public partial class MainForm : Form
     {
+
+        public Panel panel { get; set; }
+        
         public MainForm()
         {
             InitializeComponent();
             MainMenuStrip.BackColor = Color.LightGray;
+            this.panel = pContainer;
 
         }
-        
-        private void MenuItemOpen_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog x = new OpenFileDialog();
-            x.ShowDialog();
 
-            try
-            {
-                PictureWindow pictureWindow = new PictureWindow(new Bitmap(x.FileName));
-                pictureWindow.Text = x.FileName;
-                pictureWindow.Show();
-            }
-            catch
-            {
-                MessageBox.Show("You didn't pick an image!");
-            }  
-        }
-
-
-        
-
-        private void binaryOperationsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            BinaryOperationsForm binaryOperationsForm = new BinaryOperationsForm();
-            binaryOperationsForm.Show();
-        }
-
+        // lab 4
         private void morfologicalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MorphologicalOperationsForm morphologicalOperationsForm = new MorphologicalOperationsForm();
-            morphologicalOperationsForm.Show();
+            MorphologicalOperationsForm form = new MorphologicalOperationsForm() { TopLevel = false };
+            pContainer.Controls.Add(form);
+            form.Show();
         }
-
+        // lab 3
         private void neighborhoodOperationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NeighborhoodOperationsForm form = new NeighborhoodOperationsForm();
+            NeighborhoodOperationsForm form = new NeighborhoodOperationsForm(panel) { TopLevel = false };
+            pContainer.Controls.Add(form);
             form.Show();
         }
 
-        private void masksToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MasksForm form = new MasksForm();
-            form.Show();
-        }
-
+        // lab 5
         private void segmentationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SegmentationForm form = new SegmentationForm();
+            SegmentationForm form = new SegmentationForm() { TopLevel = false };
+            pContainer.Controls.Add(form);
             form.Show();
+        }
+
+        // lab 2
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PictureWindow pictureWindow = new PictureWindow(pContainer) { TopLevel = false};
+            pContainer.Controls.Add(pictureWindow);
+            pictureWindow.Show();
         }
     }
 

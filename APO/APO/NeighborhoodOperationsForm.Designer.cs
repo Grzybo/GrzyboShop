@@ -45,6 +45,7 @@
             this.doneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PictureBox = new System.Windows.Forms.PictureBox();
             this.NeighborhoodChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.binaryOperationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NeighborhoodChart)).BeginInit();
@@ -56,10 +57,11 @@
             this.fileToolStripMenuItem,
             this.blurToolStripMenuItem,
             this.eToolStripMenuItem,
-            this.saveToolStripMenuItem,
-            this.resetToolStripMenuItem,
             this.masksToolStripMenuItem,
-            this.doneToolStripMenuItem});
+            this.resetToolStripMenuItem,
+            this.doneToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.binaryOperationsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1184, 24);
@@ -131,14 +133,14 @@
             // imageToolStripMenuItem
             // 
             this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
-            this.imageToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.imageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.imageToolStripMenuItem.Text = "Image";
             this.imageToolStripMenuItem.Click += new System.EventHandler(this.imageToolStripMenuItem_Click);
             // 
             // histogramToolStripMenuItem
             // 
             this.histogramToolStripMenuItem.Name = "histogramToolStripMenuItem";
-            this.histogramToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.histogramToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.histogramToolStripMenuItem.Text = "Histogram";
             this.histogramToolStripMenuItem.Click += new System.EventHandler(this.histogramToolStripMenuItem_Click);
             // 
@@ -188,6 +190,13 @@
             this.NeighborhoodChart.TabIndex = 6;
             this.NeighborhoodChart.Text = "chart1";
             // 
+            // binaryOperationsToolStripMenuItem
+            // 
+            this.binaryOperationsToolStripMenuItem.Name = "binaryOperationsToolStripMenuItem";
+            this.binaryOperationsToolStripMenuItem.Size = new System.Drawing.Size(113, 20);
+            this.binaryOperationsToolStripMenuItem.Text = "Binary Operations";
+            this.binaryOperationsToolStripMenuItem.Click += new System.EventHandler(this.binaryOperationsToolStripMenuItem_Click);
+            // 
             // NeighborhoodOperationsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -225,5 +234,6 @@
         private System.Windows.Forms.ToolStripMenuItem doneToolStripMenuItem;
         private System.Windows.Forms.DataVisualization.Charting.Chart NeighborhoodChart;
         private System.Windows.Forms.ToolStripMenuItem histogramToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem binaryOperationsToolStripMenuItem;
     }
 }

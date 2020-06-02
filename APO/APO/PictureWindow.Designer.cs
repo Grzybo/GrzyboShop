@@ -57,6 +57,8 @@
             this.SelectiveEqualizationButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.RefreshButton = new System.Windows.Forms.Button();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureWindowChart)).BeginInit();
@@ -69,7 +71,8 @@
             this.histogramToolStripMenuItem,
             this.DuplicateMenuStripItem,
             this.neighborhoodOperationsToolStripMenuItem,
-            this.saveToolStripMenuItem});
+            this.saveToolStripMenuItem,
+            this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1286, 24);
@@ -131,7 +134,6 @@
             // 
             // histogramToolStripMenuItem1
             // 
-            this.histogramToolStripMenuItem1.Enabled = false;
             this.histogramToolStripMenuItem1.Name = "histogramToolStripMenuItem1";
             this.histogramToolStripMenuItem1.Size = new System.Drawing.Size(130, 22);
             this.histogramToolStripMenuItem1.Text = "Histogram";
@@ -358,6 +360,21 @@
             this.RefreshButton.UseVisualStyleBackColor = true;
             this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
             // PictureWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -426,5 +443,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button RefreshButton;
         private System.Windows.Forms.ToolStripMenuItem neighborhoodOperationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
     }
 }
